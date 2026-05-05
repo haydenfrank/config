@@ -1,0 +1,8 @@
+*
+
+!.gitignore
+!fish/
+!hypr/
+!theme-switcher/
+!waybar/
+!nvim/
