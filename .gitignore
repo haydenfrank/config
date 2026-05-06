@@ -6,3 +6,5 @@
 !theme-switcher/
 !waybar/
 !nvim/
+!kitty/
+!starship.toml
