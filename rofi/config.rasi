@@ -1,0 +1,9 @@
+configuration {
+  modes: [ combi ];
+  combi-modes: [ window, drun, run ];
+  matching: "fuzzy";
+  case-sensitive: false;
+  case-smart: true;
+}
+
+@theme "/home/hayden/.local/share/rofi/themes/curr_theme.rasi"
