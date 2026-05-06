@@ -1,1 +1,1 @@
-/home/hayden/.config/theme-switcher/themes/rose-pine/terminal-sequences/rose-pine.txt
+/home/hayden/.config/theme-switcher/themes/gruvbox/terminal-sequences/gruvbox.txt
