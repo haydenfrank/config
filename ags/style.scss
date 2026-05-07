@@ -2,19 +2,33 @@
 $fg-color: #{"@theme_fg_color"};
 $bg-color: #{"@theme_bg_color"};
 
-window.Bar {
-  background: transparent;
-  color: $fg-color;
+* {
+  border: none;
+  border-radius: 0px;
+
+  font-family: "SF Pro", "JetBrainsMono Nerd Font Propo", sans-serif;
   font-weight: bold;
 
-  > centerbox {
-    background: $bg-color;
-    border-radius: 10px;
-    margin: 8px;
-  }
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+}
 
-  button {
-    border-radius: 8px;
-    margin: 2px;
-  }
+.Bar button {
+  min-width: 90px;
+  min-height: 36px;
+  padding: 0;
+}
+
+.Bar button box {
+  padding: 0 12px;
+}
+
+.Bar image {
+  min-width: 16px;
+  min-height: 16px;
+}
+
+.Bar label {
+  min-width: 12px;
 }

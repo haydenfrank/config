@@ -6,22 +6,22 @@ const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
 const iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default()!)
 const hyprland = AstalHyprland.get_default()
-const workspaces = createBinding(hyprland, "workspaces")
-  .as((wss) =>
-    wss
-      .filter((ws) => ws.id > 0)
-      .sort((a, b) => a.id - b.id)
-  )
+const workspaces = createBinding(hyprland, "workspaces").as((wss) =>
+  wss.filter((ws) => ws.id > 0).sort((a, b) => a.id - b.id),
+)
 const paddedWorkspaces = workspaces.as((wss) => {
   const maxId = Math.max(...wss.map((ws) => ws.id), 5)
   const padded = []
-  for (let i = 1; i <= maxId; i++) {
+  for (let i = 1; i <= 5; i++) {
     const ws = wss.find((ws) => ws.id === i)
     if (ws) {
       padded.push(ws)
     } else {
       padded.push({ id: i, name: "", clients: [] })
     }
+  }
+  if (maxId > 5) {
+    padded.push({ id: maxId, name: "", clients: [] })
   }
   return padded
 })
@@ -45,26 +45,31 @@ export default function Bar() {
       visible
       anchor={TOP | LEFT | RIGHT}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
+      class="Bar"
     >
       <box hexpand halign={Gtk.Align.CENTER}>
         <For each={paddedWorkspaces}>
-          {(ws) =>
+          {(ws) => (
             <button
-              onClicked={() =>
-                hyprland.dispatch("workspace", ws.id.toString())
-              }
+              onClicked={() => hyprland.dispatch("workspace", ws.id.toString())}
             >
               <With value={clients}>
                 {(cs) => {
                   const first = cs.find((c) => c.workspace?.id === ws.id)
 
-                  return first ? (
-                    <image file={getAppIcon(first.class)!} />
-                  ) : (<label label={ws.id.toString()} />)
+                  return (
+                    <box spacing={6} halign={Gtk.Align.CENTER}>
+                      <image
+                        visible={!!first}
+                        file={first ? getAppIcon(first.class)! : undefined}
+                      />
+                      <label label={ws.id.toString()} />
+                    </box>
+                  )
                 }}
               </With>
             </button>
-          }
+          )}
         </For>
       </box>
     </window>
