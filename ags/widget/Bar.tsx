@@ -54,7 +54,6 @@ export default function Bar() {
                 hyprland.dispatch("workspace", ws.id.toString())
               }
             >
-              <label label={ws.id.toString()} />
               <With value={clients}>
                 {(cs) => {
                   const first = cs.find((c) => c.workspace?.id === ws.id)
