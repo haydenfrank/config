@@ -7,6 +7,24 @@ const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 const iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default()!)
 const hyprland = AstalHyprland.get_default()
 const workspaces = createBinding(hyprland, "workspaces")
+  .as((wss) =>
+    wss
+      .filter((ws) => ws.id > 0)
+      .sort((a, b) => a.id - b.id)
+  )
+const paddedWorkspaces = workspaces.as((wss) => {
+  const maxId = Math.max(...wss.map((ws) => ws.id), 5)
+  const padded = []
+  for (let i = 1; i <= maxId; i++) {
+    const ws = wss.find((ws) => ws.id === i)
+    if (ws) {
+      padded.push(ws)
+    } else {
+      padded.push({ id: i, name: "", clients: [] })
+    }
+  }
+  return padded
+})
 const clients = createBinding(hyprland, "clients")
 
 const getAppIcon = (appClass: string) => {
@@ -29,7 +47,7 @@ export default function Bar() {
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
     >
       <box hexpand halign={Gtk.Align.CENTER}>
-        <For each={workspaces}>
+        <For each={paddedWorkspaces}>
           {(ws) =>
             <button
               onClicked={() =>
