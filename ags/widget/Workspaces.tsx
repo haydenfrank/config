@@ -27,7 +27,7 @@ export const Workspaces = () => {
   })
 
   return (
-    <box hexpand halign={Gtk.Align.CENTER}>
+    <box hexpand halign={Gtk.Align.CENTER} class="workspaces">
       <For each={paddedWorkspaces}>
         {(ws) => (
           <button

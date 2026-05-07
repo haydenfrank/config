@@ -1,34 +1,137 @@
-// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+// // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+// $fg-color: #{"@theme_fg_color"};
+// $bg-color: #{"@theme_bg_color"};
+//
+// * {
+//   border: none;
+//   border-radius: 0px;
+//   margin: 0;
+//   padding: 0;
+// }
+//
+// .workspaces {
+//   background-color: white;
+// }
+//
+// .export const getDateString = () =>
+//   new Intl.DateTimeFormat("en-US", {
+//     weekday: "long",
+//     month: "long",
+//     day: "numeric",
+//     year: "numeric",
+//   }).format(new Date())workspaces button {
+//   background-color: purple;
+//   min-width: 45px;
+//   border: 2px solid black;
+//   border-radius: 14px;
+// }
+//
+// .workspaces button box {
+//    background-color: white;
+//  }
+//
+// .workspaces button label {
+//     padding: 0px 0px 0px 6px;
+//    background-color: orange;
+//  }
+//
+// .workspaces button image {
+//    background-color: orange;
+//  }
+//
+// .bar {
+//   background-color: blue;
+//   padding: 0;
+//   border: none;
+//   border-radius: 0px;
+//   margin: 0;
+//   padding: 0;
+// }
+//
+// .bar box {
+//   background-color: green;
+//   border: none;
+//   border-radius: 0px;
+//   margin: 0;
+//   padding: 0;
+// }
+//
+// .network {
+//   background-color: yellow;
+// }
+//
+// .network label {
+//   font-family: "JetBrainsMono Nerd Font Propo";
+//   background-color: red;
+// }
+
 $fg-color: #{"@theme_fg_color"};
 $bg-color: #{"@theme_bg_color"};
 
 * {
   border: none;
   border-radius: 0px;
-
-  font-family: "SF Pro", "JetBrainsMono Nerd Font Propo", sans-serif;
-  font-weight: bold;
-
-  min-height: 0;
-  padding: 0;
   margin: 0;
-}
-
-.Bar button {
-  min-width: 90px;
-  min-height: 36px;
   padding: 0;
+  background-color: transparent;
+  font-family: "SF Pro";
 }
 
-.Bar button box {
-  padding: 0 12px;
+/* ---------------- WORKSPACES ---------------- */
+
+.workspaces {
+  background-color: white;
 }
 
-.Bar image {
-  min-width: 16px;
-  min-height: 16px;
+.workspaces button {
+  background-color: purple;
+  min-width: 45px;
+  border: 2px solid black;
+  border-radius: 14px;
 }
 
-.Bar label {
-  min-width: 12px;
+.workspaces button box {
+  background-color: white;
+}
+
+.workspaces button label {
+  background-color: orange;
+}
+
+.workspaces button image {
+  background-color: orange;
+}
+
+/* ---------------- BAR ---------------- */
+
+.bar {
+  background-color: transparent;
+}
+
+.bar box {
+  background-color: green;
+  border-radius: 14px;
+}
+
+/* ---------------- NETWORK ---------------- */
+
+.network {
+  border-radius: 14px;
+}
+
+.network label {
+  font-family: "JetBrainsMono Nerd Font Propo";
+  padding: 0px 20px;
+  border-radius: 14px;
+}
+
+/* ---------------- CLOCK ---------------- */
+
+.clock {
+  border-radius: 14px;
+}
+
+.clock label {
+  padding: 0px 20px;
+  border-radius: 14px;
 }
