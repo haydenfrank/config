@@ -1,4 +1,4 @@
-import { createBinding, For } from "ags"
+import { createBinding, For, With } from "ags"
 import { Astal, Gtk, Gdk } from "ags/gtk4"
 import AstalHyprland from "gi://AstalHyprland"
 
@@ -7,12 +7,7 @@ const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 const iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default()!)
 const hyprland = AstalHyprland.get_default()
 const workspaces = createBinding(hyprland, "workspaces")
-const refresh = createBinding(hyprland, "clients")
-
-const activeWorkspaces = refresh.as(() => {
-  const wss = hyprland.get_workspaces()
-  return wss.filter((ws) => ws.id > 0).sort((a, b) => a.id - b.id)
-})
+const clients = createBinding(hyprland, "clients")
 
 const getAppIcon = (appClass: string) => {
   const icon = iconTheme.lookup_icon(
@@ -28,26 +23,30 @@ const getAppIcon = (appClass: string) => {
 
 export default function Bar() {
   return (
-    <window visible anchor={TOP | LEFT | RIGHT}>
+    <window
+      visible
+      anchor={TOP | LEFT | RIGHT}
+      exclusivity={Astal.Exclusivity.EXCLUSIVE}
+    >
       <box hexpand halign={Gtk.Align.CENTER}>
-        <For each={activeWorkspaces}>
+        <For each={workspaces}>
           {(ws) =>
-            ws.id > 0 ? (
-              <button
-                onClicked={() =>
-                  hyprland.dispatch("workspace", ws.id.toString())
-                }
-              >
-                <label label={ws.id.toString()} />
-                {ws.clients.at(0) && (
-                  <image file={getAppIcon(ws.clients.at(0)!.class ?? "")!} />
-                )}
-              </button>
-            ) : (
-              <button sensitive={false}>
-                <label label="•" />
-              </button>
-            )
+            <button
+              onClicked={() =>
+                hyprland.dispatch("workspace", ws.id.toString())
+              }
+            >
+              <label label={ws.id.toString()} />
+              <With value={clients}>
+                {(cs) => {
+                  const first = cs.find((c) => c.workspace?.id === ws.id)
+
+                  return first ? (
+                    <image file={getAppIcon(first.class)!} />
+                  ) : (<label label={ws.id.toString()} />)
+                }}
+              </With>
+            </button>
           }
         </For>
       </box>
