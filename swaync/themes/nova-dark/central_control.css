@@ -1,9 +1,10 @@
-@define-color text            @fg;
-@define-color background-alt  @bg1;
-@define-color selected        @blue;
-@define-color hover           alpha(@selected, .4);
-@define-color urgent          @red;
-@define-color background      @bg0;
+/* Map theme tokens to Matugen-generated colors */
+@define-color text            @on_surface;
+@define-color background-alt  @surface_container;
+@define-color selected        @primary;
+@define-color hover           alpha(@primary, .4);
+@define-color urgent          @error;
+@define-color background      @background;
 
 * {
   color:            @text;

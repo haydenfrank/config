@@ -1,8 +1,9 @@
-@define-color text            @foreground;
-@define-color background-alt  @color1;
-@define-color selected        @color3;
-@define-color hover           @color5;
-@define-color urgent          @color2;
+/* Map theme tokens to Matugen-generated colors */
+@define-color text            @on_surface;
+@define-color background-alt  @surface_container;
+@define-color selected        @primary;
+@define-color hover           @primary_fixed_dim;
+@define-color urgent          @error;
 
 * {
 
@@ -108,4 +109,3 @@
 .notification.normal progress {
   background-color: @selected;
 }
-
