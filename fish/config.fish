@@ -14,11 +14,6 @@ if status is-interactive # Commands to run in interactive sessions can go here
 
     # Use starship
     starship init fish | source
-    if not set -q TMUX
-        cat "$HOME/.config/fish/active.txt"
-    end
-
-    clear
 
     # Aliases
     alias clear "printf '\033[2J\033[3J\033[1;1H'" # fix: kitty doesn't clear properly
