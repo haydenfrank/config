@@ -1,16 +1,29 @@
 #!/usr/bin/env bash
-WALLDIR="$HOME/Pictures/Wallpapers"
-CWD="$(pwd)"
-cd "$WALLDIR" || exit 1
-IFS=$'\n'
-CURR_THEME=$(cat ~/.config/fish/current_theme)
 
-FILE=$(for a in $CURR_THEME/*; do echo -en "$a\n"; done | rofi -dmenu -p "")
+WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+CURRENT_WALL="$WALLPAPER_DIR/active_wallpaper"
 
-# Apply wallpaper if selected
-if [ -n "$FILE" ]; then
-    /usr/bin/awww img "$WALLDIR/$FILE" -t wipe --transition-fps 165
-    cp "$WALLDIR/$FILE" "$HOME/Pictures/Wallpapers/active_wallpaper"
-fi
+declare -A WALLMAP
 
-cd "$CWD" || exit
+# Build list of wallpapers (name -> full path)
+while IFS= read -r file; do
+    name="$(basename "$file")"
+    WALLMAP["$name"]="$file"
+done < <(find "$WALLPAPER_DIR" -type f \
+    \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \))
+
+# Show only filenames in rofi
+selected_name=$(printf "%s\n" "${!WALLMAP[@]}" | sort | rofi -dmenu -i -p "Wallpaper")
+
+# Exit if nothing selected
+[ -z "$selected_name" ] && exit 0
+
+selected="${WALLMAP[$selected_name]}"
+
+# Apply wallpaper
+cp "$selected" "$CURRENT_WALL"
+
+notify-send "Changing Theme" "Please wait while colors are extracted..."
+
+# Run matugen
+matugen image "$CURRENT_WALL" --source-color-index 1
