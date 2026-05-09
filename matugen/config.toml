@@ -29,7 +29,7 @@ output_path = '~/.config/Kvantum/matugen/matugen.svg'
 [templates.spotify]
 input_path = '~/.config/matugen/templates/spicetify.ini'
 output_path = '~/.config/spicetify/Themes/Default/color.ini'
-post_hook = 'spicetify watch -s 2>&1 &'
+post_hook = '~/.config/matugen/scripts/spicetify.sh'
 
 [templates.gtk3]
 input_path = '~/.config/matugen/templates/gtk-colors.css'
