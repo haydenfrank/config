@@ -23,7 +23,5 @@ selected="${WALLMAP[$selected_name]}"
 # Apply wallpaper
 cp "$selected" "$CURRENT_WALL"
 
-notify-send "Changing Theme" "Please wait while colors are extracted..."
-
 # Run matugen
 matugen image "$CURRENT_WALL" --source-color-index 1
