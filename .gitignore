@@ -32,4 +32,7 @@
 !ags/
 !ags/**
 
+!matugen/
+!matugen/**
+
 !starship.toml
