@@ -20,19 +20,19 @@
 
   "hyprland/workspaces": {
     "active-only": true,
-    "format": " <b>{icon}</b> {windows} ",
+    "format": " {icon}{windows} ",
     "window-rewrite-default": "",
     "persistent-workspaces": {
       "*": [1, 2, 3, 4, 5]
     },
     "window-rewrite": {
-      "kitty": "󰞷",
-      "slack": "󰒱",
-      "spotify": "󰓇",
-      "Brave": "",
-      "Discord": "",
-      "Steam": "",
-      "Zoom": ""
+      "kitty": " 󰞷",
+      "slack": " 󰒱",
+      "spotify": " 󰓇",
+      "Brave": " ",
+      "Discord": " ",
+      "Steam": " ",
+      "Zoom": " "
     },
     "all-outputs": true,
     "on-scroll-up": "hyprctl dispatch workspace e+1",
