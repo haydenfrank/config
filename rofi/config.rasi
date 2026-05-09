@@ -6,7 +6,7 @@ configuration {
     case-smart: true;
 }
 
-@import "/home/hayden/.config/rofi/colors.rasi"
+@import "~/.config/rofi/colors.rasi"
 
 * {
     font: "SF Pro Text Medium 12";
