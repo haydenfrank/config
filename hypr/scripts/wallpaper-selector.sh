@@ -24,4 +24,4 @@ selected="${WALLMAP[$selected_name]}"
 cp "$selected" "$CURRENT_WALL"
 
 # Run matugen
-matugen image "$CURRENT_WALL" --source-color-index 1
+matugen image "$CURRENT_WALL" --source-color-index 0
