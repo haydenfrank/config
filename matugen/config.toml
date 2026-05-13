@@ -5,7 +5,13 @@ command = "awww img {{ image }} -t wipe --transition-fps 165 --transition-durati
 set = true
 
 [templates.hyprland]
-input_path = '~/.config/matugen/templates/hyprland-colors.conf'
+input_path = '~/.config/matugen/templates/hyprland-colors.lua'
+output_path = '~/.config/hypr/colors.lua'
+post_hook = 'hyprctl reload'
+
+
+[templates.hyprlock]
+input_path = '~/.config/matugen/templates/hyprlock-colors.conf'
 output_path = '~/.config/hypr/colors.conf'
 
 [templates.waybar]
@@ -66,3 +72,8 @@ output_path = '~/.local/share/PrismLauncher/themes/Matugen/theme.json'
 input_path = '~/.config/matugen/templates/pywalfox-colors.json'
 output_path = '~/.cache/wal/colors.json'
 post_hook = 'pywalfox update'
+
+[templates.btop]
+input_path = '~/.config/matugen/templates/btop.theme'
+output_path = '~/.config/btop/themes/matugen.theme'
+post_hook = 'pkill -USR2 btop || true'
