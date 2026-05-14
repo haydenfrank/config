@@ -4,7 +4,7 @@
 
 local terminal = "kitty -1"
 local fileManager = "thunar"
-local browser = "prime-run brave --ozone-platform=x11"
+local browser = "brave"
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- Laptop multimedia keys for volume and LCD brightness
@@ -112,3 +112,5 @@ hl.bind(
 	mainMod .. " + SHIFT + S",
 	hl.dsp.exec_cmd("grimblast copysave area ~/Pictures/Screenshots/screenshot-$(date +%Y-%m-%d-%H-%M).png")
 )
+
+hl.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd("~/.config/hypr/scripts/focus_mode.sh"))
