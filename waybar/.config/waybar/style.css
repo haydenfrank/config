@@ -1,0 +1,125 @@
+@import 'colors.css';
+
+* {
+    border: none;
+    border-radius: 0px;
+
+    font-family: "SF Pro", "Font Awesome 7 Brands", sans-serif;
+    font-weight: bold;
+
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+/* ── Tooltips ── */
+tooltip {
+    background: @surface_container;
+    border: 1px solid @outline_variant;
+    color: @on_surface;
+}
+
+tooltip label {
+    color: @on_surface;
+    padding: 6px;
+}
+
+/* ── Dynamic Island ── */
+.modules-center {
+    background-color: @surface_container_high;
+    border: 1px solid @outline_variant;
+    border-radius: 18px;
+    padding: 2px 6px;
+}
+
+/* ── Workspaces ── */
+#workspaces {
+    padding: 3px;
+    margin: 0 4px;
+    border-radius: 14px;
+    color: @on_surface;
+    min-width: 45px;
+}
+
+#workspaces button {
+    padding: 0px 6px;
+    margin: 0px 3px;
+    border-radius: 45px;
+    min-width: 45px;
+
+    background-color: transparent;
+    color: @on_surface_variant;
+
+    transition: all 0.25s ease-in-out;
+    font-size: 14px;
+}
+
+/* Active workspace on focused monitor */
+#workspaces button.hosting-monitor.visible {
+    background-color: @primary;
+    color: @on_primary;
+}
+
+/* Active workspace on unfocused monitor */
+#workspaces button:not(.hosting-monitor).visible {
+    background-color: @secondary_container;
+    color: @on_secondary_container;
+}
+
+/* Hover */
+#workspaces button:hover {
+    background-color: @surface_container_highest;
+    color: @on_surface;
+    border-radius: 16px;
+}
+
+/* Urgent */
+#workspaces button.urgent {
+    background-color: @error;
+    color: @on_error;
+    border-radius: 16px;
+}
+
+/* ── Individual modules ── */
+#battery,
+#network,
+#custom-clock,
+#tray {
+    background-color: transparent;
+    padding: 0 10px;
+    margin: 0 2px;
+    border-radius: 0;
+    border: none;
+}
+
+/* Clock */
+#custom-clock {
+    color: @on_surface;
+    margin-left: 0;
+}
+
+/* Network */
+#network {
+    color: @tertiary;
+}
+
+/* Battery */
+#battery {
+    color: @primary;
+}
+
+/* Optional warning states */
+#battery.warning {
+    color: @error;
+}
+
+#battery.critical {
+    background-color: @error_container;
+    color: @on_error_container;
+    border-radius: 12px;
+    padding: 0 12px;
+}
