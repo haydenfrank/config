@@ -8,3 +8,7 @@ spicetify/.config/spicetify/Themes/Default/color.ini
 swaync/.config/swaync/colors.css
 wallpapers/Pictures/Wallpapers/active_wallpaper
 waybar/.config/waybar/colors.css
+gtk/.config/Kvantum/matugen/matugen.kvconfig
+gtk/.config/Kvantum/matugen/matugen.svg
+gtk/.config/gtk-3.0/colors.css
+gtk/.config/gtk-4.0/colors.css
