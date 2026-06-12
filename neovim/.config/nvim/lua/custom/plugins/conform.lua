@@ -37,6 +37,7 @@ return { -- Autoformat
       go = { 'gofmt' },
       cs = { 'csharpier' },
       sh = { 'shfmt' },
+      nix = { 'alejandra' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --
