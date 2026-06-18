@@ -4,7 +4,7 @@
 
 local terminal = "kitty -1"
 local fileManager = "thunar"
-local browser = "brave"
+local browser = "flatpak run org.mozilla.firefox"
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- Laptop multimedia keys for volume and LCD brightness
