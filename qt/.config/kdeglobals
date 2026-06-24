@@ -136,10 +136,11 @@ ForegroundVisited=155,89,182
 XftAntialias=true
 XftHintStyle=hintslight
 XftSubPixel=none
-font=SF Pro,13,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
-menuFont=SF Pro,13,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
-smallestReadableFont=SF Pro,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
-toolBarFont=SF Pro,13,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
+fixed=JetBrainsMono Nerd Font,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+font=SF Pro,11,-1,5,500,0,0,0,0,0,0,0,0,0,0,1,Medium
+menuFont=SF Pro,10,-1,5,500,0,0,0,0,0,0,0,0,0,0,1,Medium
+smallestReadableFont=SF Pro,9,-1,5,500,0,0,0,0,0,0,0,0,0,0,1,Medium
+toolBarFont=SF Pro,10,-1,5,500,0,0,0,0,0,0,0,0,0,0,1,Medium
 
 [KDE]
 contrast=4
