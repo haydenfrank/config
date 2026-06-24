@@ -3,15 +3,19 @@
 ------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+-- hl.monitor({
+-- 	output = "eDP-1",
+-- 	mode = "preferred",
+-- 	position = "1920x0",
+-- 	scale = "1.25",
+-- })
 hl.monitor({
 	output = "eDP-1",
-	mode = "preferred",
-	position = "1920x0",
-	scale = "1.25",
+	disabled = true,
 })
 
 hl.monitor({
-	output = "DP-4",
+	output = "DP-5",
 	mode = "highrr",
 	position = "0x0",
 	scale = "1",
