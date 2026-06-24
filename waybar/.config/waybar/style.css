@@ -3,11 +3,10 @@
 * {
     border: none;
     border-radius: 0px;
-
-    font-family: "SF Pro, Medium", "Font Awesome 7 Brands", sans-serif;
+    font-family: "SF Pro, Medium", "JetBrainsMono NFP", sans-serif;
     font-weight: bold;
+    font-size: 16px;
 
-    min-height: 0;
     padding: 0;
     margin: 0;
 }
@@ -16,46 +15,36 @@ window#waybar {
     background: transparent;
 }
 
-/* ── Tooltips ── */
-tooltip {
-    background: @surface_container;
-    border: 1px solid @outline_variant;
-    color: @on_surface;
-}
-
-tooltip label {
-    color: @on_surface;
-    padding: 6px;
-}
-
 /* ── Dynamic Island ── */
 .modules-center {
-    background-color: @surface_container_high;
+    background-color: @surface_container;
     border: 1px solid @outline_variant;
     border-radius: 18px;
-    padding: 2px 6px;
+    min-height: 25px;
+}
+
+
+/* Clock */
+#custom-clock {
+    background-color: transparent;
+    color: @on_surface_variant;
+    margin: 0 18px 0 18px;
 }
 
 /* ── Workspaces ── */
 #workspaces {
-    padding: 3px;
-    margin: 0 4px;
-    border-radius: 14px;
-    color: @on_surface;
-    min-width: 45px;
+    background-color: @surface_container_high;
+    padding: 0 0 0 18px;
+    border-radius: 18px;
 }
 
 #workspaces button {
-    padding: 0px 6px;
-    margin: 0px 3px;
-    border-radius: 45px;
-    min-width: 45px;
-
-    background-color: transparent;
-    color: @on_surface_variant;
-
     transition: all 0.25s ease-in-out;
-    font-size: 14px;
+    margin: 3px 6px 3px 0;
+    min-width: 65px;
+    border-radius: 18px;
+    background-color: @transparent;
+    color: @on_surface_variant;
 }
 
 /* Active workspace on focused monitor */
@@ -73,53 +62,32 @@ tooltip label {
 /* Hover */
 #workspaces button:hover {
     background-color: @surface_container_highest;
-    color: @on_surface;
-    border-radius: 16px;
 }
 
-/* Urgent */
-#workspaces button.urgent {
-    background-color: @error;
-    color: @on_error;
-    border-radius: 16px;
-}
-
-/* ── Individual modules ── */
-#battery,
-#network,
-#custom-clock,
-#tray {
-    background-color: transparent;
-    padding: 0 10px;
-    margin: 0 2px;
-    border-radius: 0;
-    border: none;
-}
-
-/* Clock */
-#custom-clock {
-    color: @on_surface;
-    margin-left: 0;
-}
 
 /* Network */
 #network {
-    color: @tertiary;
+    color: @primary;
+    margin: 0 18px 0 18px;
+    min-width: 18px;
 }
 
 /* Battery */
 #battery {
-    color: @primary;
+    color: @secondary;
+    margin: 0 18px 0 0;
+    min-width: 18px;
 }
 
-/* Optional warning states */
-#battery.warning {
-    color: @error;
+/* ── Tooltips ── */
+tooltip {
+    background: @surface_container;
+    border: 1px solid @outline_variant;
+    color: @on_surface;
+    border-radius: 18px;
 }
 
-#battery.critical {
-    background-color: @error_container;
-    color: @on_error_container;
-    border-radius: 12px;
-    padding: 0 12px;
+tooltip label {
+    color: @on_surface;
+    padding: 0 18px 0 18px;
 }
