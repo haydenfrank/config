@@ -60,12 +60,12 @@
   },
   "network": {
     "interface": "wlan0",
-    "format": "{ifname}",
+    "format": "",
     "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
     "format-wifi": "{icon}",
     "format-ethernet": "{ipaddr}/{cidr} 󰊗",
     "format-disconnected": "󰤯", //An empty format will hide the module.
-    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+    "tooltip-format": "Wired Connection",
     "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
     "tooltip-format-ethernet": "{ifname} ",
     "tooltip-format-disconnected": "Disconnected",
