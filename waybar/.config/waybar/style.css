@@ -3,7 +3,7 @@
 * {
     border: none;
     border-radius: 0px;
-    font-family: "SF Pro, Medium", "JetBrainsMono NFP", sans-serif;
+    font-family: "SF Pro, Medium", "JetBrainsMono Nerd Font Propo", sans-serif;
     font-weight: bold;
     font-size: 16px;
 
@@ -18,7 +18,7 @@ window#waybar {
 /* ── Dynamic Island ── */
 .modules-center {
     background-color: @surface_container;
-    border: 1px solid @outline_variant;
+    border: 2px solid @outline_variant;
     border-radius: 18px;
     min-height: 25px;
 }
@@ -34,17 +34,23 @@ window#waybar {
 /* ── Workspaces ── */
 #workspaces {
     background-color: @surface_container_high;
-    padding: 0 0 0 18px;
+    padding: 0 6px 0 3px;
     border-radius: 18px;
+    border-right: 2px solid @outline_variant;
+    border-left: 2px solid @outline_variant;
 }
 
 #workspaces button {
     transition: all 0.25s ease-in-out;
-    margin: 3px 6px 3px 0;
+    margin: 3px 0px 3px 3px;
     min-width: 65px;
     border-radius: 18px;
     background-color: @transparent;
     color: @on_surface_variant;
+}
+
+#workspaces button label {
+    padding: 0 12px 0 12px;
 }
 
 /* Active workspace on focused monitor */
@@ -74,7 +80,7 @@ window#waybar {
 
 /* Battery */
 #battery {
-    color: @secondary;
+    color: @tertiary;
     margin: 0 18px 0 0;
     min-width: 18px;
 }
@@ -83,11 +89,10 @@ window#waybar {
 tooltip {
     background: @surface_container;
     border: 1px solid @outline_variant;
-    color: @on_surface;
     border-radius: 18px;
 }
 
 tooltip label {
-    color: @on_surface;
+    color: @on_surface_variant;
     padding: 0 18px 0 18px;
 }

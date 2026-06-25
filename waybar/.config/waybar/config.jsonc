@@ -20,21 +20,20 @@
 
   "hyprland/workspaces": {
     "active-only": true,
-    "format": "{icon}",
-    // "window-rewrite-default": " ",
+    "format": "{icon} {windows}",
+    "window-rewrite-default": "",
     "persistent-workspaces": {
       "*": [1, 2, 3, 4, 5]
     },
-    // "window-rewrite": {
-    //   "kitty": " 󰞷",
-    //   "slack": " 󰒱",
-    //   "spotify": " 󰓇",
-    //   "Brave": " ",
-    //   "Discord": " ",
-    //   "Steam": " ",
-    //   "Firefox": " 󰈹",
-    //   "Zoom": " "
-    // },
+    "window-rewrite": {
+      "kitty": "󰞷",
+      "slack": "󰒱",
+      "spotify": "󰓇",
+      "Discord": "",
+      "Steam": "",
+      "Firefox": "󰈹",
+      "Zoom": ""
+    },
     "all-outputs": true,
     "on-scroll-up": "hyprctl dispatch workspace e+1",
     "on-scroll-down": "hyprctl dispatch workspace e-1",
