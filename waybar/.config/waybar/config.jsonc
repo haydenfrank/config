@@ -20,7 +20,7 @@
 
   "hyprland/workspaces": {
     "active-only": true,
-    "format": "{icon} {windows}",
+    "format": " {icon} {windows}",
     "window-rewrite-default": "",
     "persistent-workspaces": {
       "*": [1, 2, 3, 4, 5]
@@ -59,7 +59,7 @@
   },
   "network": {
     "interface": "wlan0",
-    "format": "",
+    "format": "",
     "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
     "format-wifi": "{icon}",
     "format-ethernet": "{ipaddr}/{cidr} 󰊗",
