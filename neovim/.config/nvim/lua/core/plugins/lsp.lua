@@ -182,7 +182,7 @@ do
     -- You can add other tools here that you want Mason to install
     "typescript-language-server",
     "tree-sitter-cli",
-    "prettier",
+    "oxfmt",
     "shfmt",
     "bash-language-server",
     "shellcheck",
