@@ -77,3 +77,5 @@ do
     callback = function() vim.hl.on_yank() end,
   })
 end
+
+vim.keymap.set({ 'n', 'v' }, 'd', '"_d', { desc = 'Delete without copying to register' })
