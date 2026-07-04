@@ -1,10 +1,10 @@
-require('core.options')
-require('core.keymaps')
-require('core.autocmds')
-require('core.plugins.ui')
-require('core.plugins.search')
-require('core.plugins.lsp')
-require('core.plugins.formatting')
-require('core.plugins.completion')
-require('core.plugins.treesitter')
-require('custom.plugins')
+require 'core.options'
+require 'core.keymaps'
+require 'core.autocmds'
+require 'core.plugins.ui'
+require 'core.plugins.search'
+require 'core.plugins.lsp'
+require 'core.plugins.formatting'
+require 'core.plugins.completion'
+require 'core.plugins.treesitter'
+require 'custom.plugins'

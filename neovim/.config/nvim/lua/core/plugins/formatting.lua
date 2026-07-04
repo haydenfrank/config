@@ -16,8 +16,31 @@ do
     format_on_save = function(bufnr)
       -- You can specify filetypes to autoformat on save here:
       local enabled_filetypes = {
-        -- lua = true,
+        lua = true,
         -- python = true,
+        javascript = true,
+        javascriptreact = true,
+        typescript = true,
+        typescriptreact = true,
+        toml = true,
+        json = true,
+        jsonc = true,
+        json5 = true,
+        yaml = true,
+        html = true,
+        vue = true,
+        handlebars = true,
+        css = true,
+        scss = true,
+        less = true,
+        graphql = true,
+        markdown = true,
+        bash = true,
+        c = true,
+        cpp = true,
+        hpp = true,
+        h = true,
+        objectivec = true,
       }
       if enabled_filetypes[vim.bo[bufnr].filetype] then
         return { timeout_ms = 500 }
@@ -54,6 +77,11 @@ do
       graphql = { 'oxfmt' },
       markdown = { 'oxfmt' },
       bash = { 'shfmt' },
+      lua = { 'stylua' },
+      cpp = { 'clang-format' },
+      c = { 'clang-format' },
+      hpp = { 'clang-format' },
+      h = { 'clang-format' },
     },
   }
 

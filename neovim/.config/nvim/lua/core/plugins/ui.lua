@@ -9,7 +9,6 @@ local function gh(repo) return 'https://github.com/' .. repo end
 -- guess-indent, gitsigns, which-key, colorscheme, todo-comments, mini modules
 -- ============================================================
 do
-
   -- [[ Installing and Configuring Plugins ]]
   --
   -- To install a plugin simply call `vim.pack.add` with its git url.
