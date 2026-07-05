@@ -1,9 +1,3 @@
----Because most plugins are hosted on GitHub, you can use the helper
----function to have less repetition in the following sections.
----@param repo string
----@return string
-local function gh(repo) return 'https://github.com/' .. repo end
-
 -- ============================================================
 -- SECTION 5: SEARCH & NAVIGATION
 -- Telescope setup, keymaps, LSP picker mappings
@@ -35,11 +29,11 @@ do
 
   ---@type (string|vim.pack.Spec)[]
   local telescope_plugins = {
-    gh 'nvim-lua/plenary.nvim',
-    gh 'nvim-telescope/telescope.nvim',
-    gh 'nvim-telescope/telescope-ui-select.nvim',
+    'https://github.com/nvim-lua/plenary.nvim',
+    'https://github.com/nvim-telescope/telescope.nvim',
+    'https://github.com/nvim-telescope/telescope-ui-select.nvim',
   }
-  if vim.fn.executable 'make' == 1 then table.insert(telescope_plugins, gh 'nvim-telescope/telescope-fzf-native.nvim') end
+  if vim.fn.executable 'make' == 1 then table.insert(telescope_plugins, 'https://github.com/nvim-telescope/telescope-fzf-native.nvim') end
 
   -- NOTE: You can install multiple plugins at once
   vim.pack.add(telescope_plugins)

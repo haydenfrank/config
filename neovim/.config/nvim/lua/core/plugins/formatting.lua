@@ -1,16 +1,10 @@
----Because most plugins are hosted on GitHub, you can use the helper
----function to have less repetition in the following sections.
----@param repo string
----@return string
-local function gh(repo) return 'https://github.com/' .. repo end
-
 -- ============================================================
 -- SECTION 7: FORMATTING
 -- conform.nvim setup and keymap
 -- ============================================================
 do
   -- [[ Formatting ]]
-  vim.pack.add { gh 'stevearc/conform.nvim' }
+  vim.pack.add { 'https://github.com/stevearc/conform.nvim' }
   require('conform').setup {
     notify_on_error = false,
     format_on_save = function(bufnr)
