@@ -15,11 +15,12 @@
 
   "hyprland/workspaces": {
     "active-only": true,
-    "format": " {icon} {windows}",
+    "format": "{icon} {windows}",
     "window-rewrite-default": "",
     "persistent-workspaces": {
       "*": [1, 2, 3, 4, 5],
     },
+    "tooltip": false,
     "window-rewrite": {
       "kitty": "󰞷",
       "slack": "󰒱",
@@ -28,6 +29,9 @@
       "Steam": "",
       "Firefox": "󰈹",
       "Zoom": "",
+    },
+    "format-icons": {
+      "empty": "",
     },
     "all-outputs": true,
     "on-scroll-up": "hyprctl eval 'hl.dispatch(hl.dsp.focus({ workspace = \"+1\" }))'",

@@ -71,6 +71,11 @@ window#waybar {
 }
 
 
+#workspaces button.empty label {
+    padding: 0 0 0 10px;
+}
+
+
 /* Network */
 #network {
     color: @primary;
