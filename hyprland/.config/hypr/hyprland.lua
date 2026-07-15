@@ -1,5 +1,4 @@
 require("modules.monitors")
-require("modules.workspaces")
 require("modules.env")
 require("modules.keybinds")
 require("modules.execs")

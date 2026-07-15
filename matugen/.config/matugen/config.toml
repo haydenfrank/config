@@ -17,7 +17,7 @@ output_path = '~/.config/hypr/colors.conf'
 [templates.waybar]
 input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/waybar/colors.css'
-post_hook = 'pkill -SIGUSR2 waybar'
+post_hook = 'killall waybar; uwsm app waybar &'
 
 [templates.kitty]
 input_path = '~/.config/matugen/templates/kitty-colors.conf'
