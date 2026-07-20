@@ -93,8 +93,7 @@ hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(browser))
 
-hl.bind("ALT + GRAVE", hl.dsp.pass({ window = "class:^(discord)$" }))
-hl.bind("ALT + HOME", hl.dsp.pass({ window = "class:^(discord)$" }))
+hl.bind("ALT + GRAVE", hl.dsp.send_shortcut({ mods = "", key = "F4", window = "class:^(discord)$" }))
 
 hl.bind(mainMod .. " + X", hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + SUPER_L", hl.dsp.exec_cmd("pgrep rofi && pkill rofi || rofi -show drun -show-icons"))
