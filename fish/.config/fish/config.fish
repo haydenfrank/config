@@ -20,10 +20,10 @@ if status is-interactive # Commands to run in interactive sessions can go here
     alias celar "printf '\033[2J\033[3J\033[1;1H'"
     alias claer "printf '\033[2J\033[3J\033[1;1H'"
     alias ls 'eza --icons'
-    alias pamcan pacman
-    alias q 'qs -c ii'
     alias gl "git log --oneline --pretty=oneline"
     alias gco "git checkout"
+    alias fd "fd -H"
+    alias locate='fd -H -I "$argv" / 2>/dev/null'
 end
 
 # opencode
