@@ -190,3 +190,11 @@ hl.window_rule({
 	float = true,
 	size = { 500, 500 },
 })
+
+hl.window_rule({
+	match = {
+		class = "org.kde.ark",
+	},
+	float = true,
+	size = { 1280, 720 },
+})
