@@ -52,6 +52,9 @@ hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move({ direction = "right" 
 hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.move({ direction = "up" }))
 hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.move({ direction = "down" }))
 
+hl.bind(mainMod .. " + CTRL + left", hl.dsp.workspace.move({ monitor = "+1" }))
+hl.bind(mainMod .. " + CTRL + right", hl.dsp.workspace.move({ monitor = "-1" }))
+
 hl.bind(mainMod .. " + Q", hl.dsp.window.close({ window = "activewindow" }))
 hl.bind(mainMod .. " + SHIFT + ALT + Q", hl.dsp.exec_cmd("hyprctl kill"))
 
