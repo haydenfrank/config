@@ -1,0 +1,9 @@
+[color]
+from = "{{colors.on_primary.default.hex}}"
+to = "{{colors.tertiary.default.hex}}"
+
+[animation]
+fps = 120
+wind = 2
+height = 3
+direction = false

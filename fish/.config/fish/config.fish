@@ -16,9 +16,9 @@ if status is-interactive # Commands to run in interactive sessions can go here
     starship init fish | source
 
     # Aliases
-    alias clear "printf '\033[2J\033[3J\033[1;1H'" # fix: kitty doesn't clear properly
-    alias celar "printf '\033[2J\033[3J\033[1;1H'"
-    alias claer "printf '\033[2J\033[3J\033[1;1H'"
+    alias clear "pyroclear" # fix: kitty doesn't clear properly
+    alias celar "pyroclear"
+    alias claer "pyroclear"
     alias ls 'eza --icons'
     alias gl "git log --oneline --pretty=oneline"
     alias gco "git checkout"
