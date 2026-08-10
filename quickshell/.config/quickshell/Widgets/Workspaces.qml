@@ -169,7 +169,7 @@ Rectangle {
                             Timer {
                                 id: iconTimer
 
-                                interval: 100
+                                interval: 5
                                 repeat: true
                                 running: false
 
