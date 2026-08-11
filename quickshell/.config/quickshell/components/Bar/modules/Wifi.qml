@@ -47,6 +47,10 @@ Text {
     font.styleName: "Propo"
     font.pixelSize: 16
     color: colors.primary
+    Component.onCompleted: {
+        WifiMenu;
+    }
+
     MouseArea {
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
