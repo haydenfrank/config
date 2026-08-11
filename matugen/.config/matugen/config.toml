@@ -76,7 +76,7 @@ post_hook = 'pkill -USR2 btop || true'
 
 [templates.quickshell]
 input_path = '~/.config/matugen/templates/quickshell.qml'
-output_path = '~/.config/quickshell/Widgets/Services/Colors.qml'
+output_path = '~/.config/quickshell/config/Colors.qml'
 
 [templates.pyroclear]
 input_path = '~/.config/matugen/templates/pyroclear.toml'
