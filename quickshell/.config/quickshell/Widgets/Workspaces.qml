@@ -139,46 +139,28 @@ Rectangle {
                     Repeater {
                         model: workspace?.toplevels ?? []
 
-                        delegate: IconImage {
+                        delegate: Item {
                             required property var modelData
-
                             width: 18
                             height: 18
 
                             property string appId: modelData.wayland?.appId ?? ""
-                            property var desktopEntry: null
+                            property var desktopEntry: appId !== "" ? DesktopEntries.heuristicLookup(appId) : null
 
-                            function updateIcon() {
-                                if (appId === "") {
-                                    desktopEntry = null;
-                                    return;
-                                }
-
-                                desktopEntry = DesktopEntries.heuristicLookup(appId);
+                            IconImage {
+                                id: appIcon
+                                anchors.fill: parent
+                                source: desktopEntry?.icon ? Quickshell.iconPath(desktopEntry.icon) : ""
+                                asynchronous: true
+                                mipmap: true
+                                visible: status === Image.Ready
                             }
 
-                            source: desktopEntry?.icon ? Quickshell.iconPath(desktopEntry.icon) : Quickshell.iconPath("application-x-executable")
-
-                            mipmap: true
-
-                            Component.onCompleted: {
-                                updateIcon();
-                                iconTimer.start();
-                            }
-
-                            Timer {
-                                id: iconTimer
-
-                                interval: 5
-                                repeat: true
-                                running: false
-
-                                onTriggered: {
-                                    updateIcon();
-
-                                    if (desktopEntry?.icon)
-                                        stop();
-                                }
+                            IconImage {
+                                anchors.fill: parent
+                                visible: appIcon.status === Image.Error || appIcon.status === Image.Null
+                                source: Quickshell.iconPath("application-x-executable")
+                                mipmap: true
                             }
                         }
                     }
