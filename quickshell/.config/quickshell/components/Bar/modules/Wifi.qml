@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell.Networking
 import Quickshell
+import qs.components.Services
 
 Text {
     property var wifiIcons: ["󰤯" // disconnected
@@ -51,7 +52,7 @@ Text {
         cursorShape: Qt.PointingHandCursor
         hoverEnabled: true
         onClicked: {
-            Quickshell.execDetached(["sh", "-c", "~/.config/quickshell/Scripts/open-nm-sidebar.sh"]);
+            WifiMenu.toggle();
         }
     }
 }

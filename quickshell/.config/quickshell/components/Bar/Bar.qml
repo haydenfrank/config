@@ -1,9 +1,9 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import "../../config"
-import "modules"
-import "../Services"
+import qs.config
+import qs.components.Bar.modules
+import qs.components.Services
 
 Scope {
     // no more time object

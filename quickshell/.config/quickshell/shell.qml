@@ -1,6 +1,8 @@
 // shell.qml
 import Quickshell
-import "components/Bar"
+import QtQml
+import qs.components.Bar
+import qs.components.Services
 
 Scope {
     Bar {}

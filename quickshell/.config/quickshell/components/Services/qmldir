@@ -1,0 +1,3 @@
+module qs.components.Services
+singleton Time 1.0 Time.qml
+singleton WifiMenu 1.0 WifiMenu.qml

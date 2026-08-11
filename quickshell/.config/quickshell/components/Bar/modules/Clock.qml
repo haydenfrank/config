@@ -1,5 +1,5 @@
 import QtQuick
-import "../../Services"
+import qs.components.Services
 
 Text {
     font.family: "SF Pro Text"
