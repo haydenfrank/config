@@ -1,7 +1,7 @@
 // shell.qml
 import Quickshell
-import "./Widgets"
+import "components/Bar"
 
 Scope {
-  Bar {}
+    Bar {}
 }
