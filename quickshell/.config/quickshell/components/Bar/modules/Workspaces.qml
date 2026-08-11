@@ -3,6 +3,7 @@ import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Widgets
 import QtQuick.Layouts
+import qs.components.Services
 
 Rectangle {
     id: workspaceContainer
@@ -144,22 +145,14 @@ Rectangle {
                             width: 18
                             height: 18
 
-                            property string appId: modelData.wayland?.appId ?? ""
-                            property var desktopEntry: appId !== "" ? DesktopEntries.heuristicLookup(appId) : null
+                            property string appClass: modelData.wayland?.appId ?? ""
+                            property var iconSource: Quickshell.iconPath(AppSearch.guessIcon(appClass), "image-missing")
 
                             IconImage {
                                 id: appIcon
                                 anchors.fill: parent
-                                source: desktopEntry?.icon ? Quickshell.iconPath(desktopEntry.icon) : ""
+                                source: parent.iconSource
                                 asynchronous: true
-                                mipmap: true
-                                visible: status === Image.Ready
-                            }
-
-                            IconImage {
-                                anchors.fill: parent
-                                visible: appIcon.status === Image.Error || appIcon.status === Image.Null
-                                source: Quickshell.iconPath("application-x-executable")
                                 mipmap: true
                             }
                         }
