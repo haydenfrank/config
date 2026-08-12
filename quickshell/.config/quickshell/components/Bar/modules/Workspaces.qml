@@ -152,7 +152,6 @@ Rectangle {
                                 id: appIcon
                                 anchors.fill: parent
                                 source: parent.iconSource
-                                asynchronous: true
                                 mipmap: true
                             }
                         }
