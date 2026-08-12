@@ -47,10 +47,4 @@ Text {
     font.styleName: "Propo"
     font.pixelSize: 16
     color: colors.primary
-
-    MouseArea {
-        anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
-        hoverEnabled: true
-    }
 }
