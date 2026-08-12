@@ -1,0 +1,4 @@
+module qs.components.IPC
+
+IPC 1.0 IPC.qml
+Reload 1.0 Reload.qml
