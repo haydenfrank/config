@@ -30,7 +30,7 @@ Text {
         var icons = isCharging ? chargingIcons : batteryIcons;
         var index = Math.floor(batteryPercentage * 10);
         index = Math.max(0, Math.min(10, index));
-        return icons[index];
+        return icons[index] ? icons[index] : "";
     }
 
     font.family: "JetBrainsMono Nerd Font"
