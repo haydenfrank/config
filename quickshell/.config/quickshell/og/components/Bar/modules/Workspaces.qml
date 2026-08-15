@@ -6,28 +6,28 @@ import QtQuick.Layouts
 import qs.components.Services
 
 Rectangle {
-    id: workspaceContainer
+    id: workspacesModule
 
     color: colors.surface_container_high
     border.color: colors.outline_variant
     border.width: 1
     radius: 18
 
-    implicitWidth: workspaceRow.implicitWidth + 12
-    implicitHeight: workspaceRow.implicitHeight + 8
+    implicitWidth: workspacesModuleRow.implicitWidth + 12
+    implicitHeight: workspacesModuleRow.implicitHeight + 8
 
     RowLayout {
-        id: workspaceRow
+        id: workspacesModuleRow
 
         anchors.centerIn: parent
         spacing: 3
 
-        property var thisMonitor: Hyprland.monitorFor(root.screen)
+        property var thisMonitor: Hyprland.monitorFor(barWindow.screen)
         property var otherMonitor: Hyprland.monitors.values.find(m => m !== thisMonitor)
-        property var workspaceIds: []
+        property var workspacesButtonLabelTexts: []
 
         Timer {
-            id: workspaceUpdateTimer
+            id: workspacesModuleUpdateTimer
 
             interval: 50
             repeat: false
@@ -48,37 +48,40 @@ Rectangle {
 
                 ids.sort((a, b) => a - b);
 
-                workspaceRow.workspaceIds = ids;
+                workspacesModuleRow.workspacesButtonLabelTexts = ids;
             }
         }
 
         Connections {
+            id: workspacesModuleConnections
             target: Hyprland.workspaces
 
             function onValuesChanged() {
-                workspaceUpdateTimer.restart();
+                workspacesModuleUpdateTimer.restart();
             }
         }
 
         Component.onCompleted: {
-            workspaceUpdateTimer.start();
+            workspacesModuleUpdateTimer.start();
         }
 
         Repeater {
-            model: workspaceRow.workspaceIds
+            id: workspacesModuleRepeater
+            model: workspacesModuleRow.workspacesButtonLabelTexts
 
             delegate: Rectangle {
+                id: workspaceButton
                 required property int modelData
 
-                property int workspaceId: modelData
+                property int workspacesButtonLabelText: modelData
 
-                property var workspace: Hyprland.workspaces.values.find(w => w.id === workspaceId)
+                property var workspace: Hyprland.workspaces.values.find(w => w.id === workspacesButtonLabelText)
 
-                property bool focusedHere: workspaceId === workspaceRow.thisMonitor?.activeWorkspace?.id
+                property bool focusedHere: workspacesButtonLabelText === workspacesModuleRow.thisMonitor?.activeWorkspace?.id
 
-                property bool focusedThere: workspaceId === workspaceRow.otherMonitor?.activeWorkspace?.id
+                property bool focusedThere: workspacesButtonLabelText === workspacesModuleRow.otherMonitor?.activeWorkspace?.id
 
-                implicitWidth: Math.max(65, contentRow.implicitWidth + 16)
+                implicitWidth: Math.max(65, workspacesButtonLabelRow.implicitWidth + 16)
                 implicitHeight: 24
 
                 property bool hovered: false
@@ -106,13 +109,13 @@ Rectangle {
                 }
 
                 Row {
-                    id: contentRow
+                    id: workspacesButtonLabelRow
 
                     anchors.centerIn: parent
                     spacing: 5
 
                     Text {
-                        text: workspaceId
+                        text: workspacesButtonLabelText
 
                         font.family: "SF Pro Text"
                         font.styleName: "Medium"
@@ -138,9 +141,11 @@ Rectangle {
                     }
 
                     Repeater {
+                        id: workspacesButtonLabelIconRepeater
                         model: workspace?.toplevels ?? []
 
                         delegate: Item {
+                            id: workspacesButtonLabelIconContainer
                             required property var modelData
                             width: 18
                             height: 18
@@ -149,7 +154,7 @@ Rectangle {
                             property var iconSource: Quickshell.iconPath(AppSearch.guessIcon(appClass), "image-missing")
 
                             IconImage {
-                                id: appIcon
+                                id: workspacesButtonLabelIconImage
                                 anchors.fill: parent
                                 source: parent.iconSource
                                 mipmap: true
@@ -158,6 +163,7 @@ Rectangle {
                     }
                 }
                 MouseArea {
+                    id: workspacesButtonMouseArea
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
@@ -167,7 +173,7 @@ Rectangle {
                         if (workspace) {
                             workspace.activate();
                         } else {
-                            Hyprland.dispatch("hl.dsp.focus({workspace = " + workspaceId + "})");
+                            Hyprland.dispatch("hl.dsp.focus({workspace = " + workspacesButtonLabelText + "})");
                         }
                     }
                 }

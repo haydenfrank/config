@@ -6,8 +6,6 @@ import qs.components.Bar.modules
 import qs.components.Services
 
 Scope {
-    // no more time object
-
     Colors {
         id: colors
     }
@@ -16,13 +14,13 @@ Scope {
         model: Quickshell.screens
 
         PanelWindow {
-            id: root
+            id: barWindow
 
             required property var modelData
 
             screen: modelData
             color: "transparent"
-            implicitHeight: island.implicitHeight + 6
+            implicitHeight: barContainer.implicitHeight + 6
 
             anchors {
                 top: true
@@ -31,19 +29,19 @@ Scope {
             }
 
             Rectangle {
-                id: island
+                id: barContainer
 
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottom: parent.bottom
                 color: colors.surface_container
-                implicitWidth: islandLayout.implicitWidth + 36
+                implicitWidth: barContainerRow.implicitWidth + 36
                 implicitHeight: 36
                 radius: 18
                 border.color: colors.outline_variant
                 border.width: 2
 
                 RowLayout {
-                    id: islandLayout
+                    id: barContainerRow
 
                     anchors.centerIn: parent
                     spacing: 18
