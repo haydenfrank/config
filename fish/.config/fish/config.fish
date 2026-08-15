@@ -25,6 +25,7 @@ if status is-interactive # Commands to run in interactive sessions can go here
     alias fd "fd -H"
     alias locate='fd -H -I "$argv" / 2>/dev/null'
     alias grep "rg"
+    alias delete_payday_folder "rm -rf /home/hayden/.local/share/Steam/steamapps/compatdata/218620/"
 end
 
 # opencode

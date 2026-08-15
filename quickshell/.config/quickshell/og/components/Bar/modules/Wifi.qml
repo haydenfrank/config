@@ -47,4 +47,12 @@ Text {
     font.styleName: "Propo"
     font.pixelSize: 16
     color: colors.primary
+    MouseArea {
+        anchors.fill: parent
+        hoverEnabled: true
+        onEntered: {
+            cursorShape = Qt.PointingHandCursor;
+        }
+        onClicked: Quickshell.execDetached(["bash", Quickshell.shellDir + "/scripts/open-nm-sidebar.sh"])
+    }
 }

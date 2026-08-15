@@ -13,4 +13,5 @@ gtk/.config/gtk-4.0/colors.css
 btop/.config/btop/themes/matugen.theme
 qt/.config/Kvantum/matugen/matugen.kvconfig
 qt/.config/Kvantum/matugen/matugen.svg
-quickshell/.config/quickshell/config/Colors.qml
+quickshell/.config/quickshell/og/config/Colors.qml
+quickshell/.config/quickshell/new/config/Colors.qml

@@ -1,0 +1,65 @@
+import Quickshell
+import QtQuick
+import Quickshell.Services.UPower
+
+PopupWindow {
+    id: batteryPopup
+    property bool isOpen: false
+    required property var batteryModule
+    property bool isCharging: UPower.displayDevice.state === UPowerDeviceState.Charging
+    property bool isPlugged: UPower.displayDevice.state === UPowerDeviceState.Charging || UPower.displayDevice.state === UPowerDeviceState.FullyCharged
+    property bool isFull: UPower.displayDevice.state === UPowerDeviceState.FullyCharged
+    property var batteryPercentage: Math.round(UPower.displayDevice.percentage * 100) + "%"
+    property var timeToEmpty: formatTime(UPower.displayDevice.timeToEmpty)
+    property var timeToFull: formatTime(UPower.displayDevice.timeToFull)
+
+    function toggle() {
+        isOpen = !isOpen;
+    }
+
+    function formatTime(seconds) {
+        if (seconds <= 0)
+            return "";
+        var h = Math.floor(seconds / 3600);
+        var m = Math.floor((seconds % 3600) / 60);
+        return (h > 0 ? h : "") + (h > 0 ? "h" : "") + (m > 0 ? m : "") + (m > 0 ? "m" : "");
+    }
+
+    visible: isOpen
+    color: "transparent"
+
+    implicitWidth: batteryPopupLabel.implicitWidth + 36
+    implicitHeight: batteryPopupLabel.implicitHeight + 18
+
+    anchor.item: batteryModule
+    anchor.rect.x: (batteryModule.width - implicitWidth) / 2
+    anchor.rect.y: batteryModule.height + 8
+
+    Rectangle {
+        id: batteryPopupContainer
+        anchors.fill: parent
+        radius: 18
+        color: colors.surface_container
+        border.color: colors.outline_variant
+        border.width: 2
+        Text {
+            id: batteryPopupLabel
+
+            font.family: "SF Pro Text"
+            font.styleName: "Medium"
+            font.bold: true
+            font.pixelSize: 16
+            color: colors.on_surface_variant
+            anchors.centerIn: parent
+            text: {
+                if (isCharging) {
+                    return batteryPercentage + " (" + timeToFull + " until full)";
+                } else if (isFull) {
+                    return batteryPercentage + " (full)";
+                } else {
+                    return batteryPercentage + " (" + timeToEmpty + " until empty)";
+                }
+            }
+        }
+    }
+}

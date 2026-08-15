@@ -22,7 +22,7 @@ Rectangle {
         anchors.centerIn: parent
         spacing: 3
 
-        property var thisMonitor: Hyprland.monitorFor(panelWindow.screen)
+        property var thisMonitor: Hyprland.monitorFor(root.screen)
         property var otherMonitor: Hyprland.monitors.values.find(m => m !== thisMonitor)
         property var workspaceIds: []
 

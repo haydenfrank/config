@@ -16,7 +16,7 @@ Scope {
         model: Quickshell.screens
 
         PanelWindow {
-            id: panelWindow
+            id: root
 
             required property var modelData
 
@@ -36,25 +36,33 @@ Scope {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottom: parent.bottom
                 color: colors.surface_container
-                implicitWidth: rowLayout.implicitWidth + 36
+                implicitWidth: islandLayout.implicitWidth + 36
                 implicitHeight: 36
                 radius: 18
                 border.color: colors.outline_variant
                 border.width: 2
 
                 RowLayout {
-                    id: rowLayout
+                    id: islandLayout
 
                     anchors.centerIn: parent
                     spacing: 18
 
-                    Clock {}
+                    Clock {
+                        id: clockModule
+                    }
 
-                    Workspaces {}
+                    Workspaces {
+                        id: workspacesModule
+                    }
 
-                    Wifi {}
+                    Wifi {
+                        id: wifiModule
+                    }
 
-                    Battery {}
+                    Battery {
+                        id: batteryModule
+                    }
                 }
             }
         }
