@@ -4,12 +4,14 @@ import qs.components.Bar.modules
 
 Text {
     id: clockModule
+    property var time: Time.time
+    property var date: Time.date
     font.family: "SF Pro Text"
     font.styleName: "Medium"
     font.bold: true
     font.pixelSize: 16
     color: colors.on_surface_variant
-    text: Time.time
+    text: time
     ClockPopup {
         id: clockPopup
         clockModule: clockModule

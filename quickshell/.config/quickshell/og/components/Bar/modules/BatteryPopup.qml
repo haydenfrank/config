@@ -1,17 +1,10 @@
 import Quickshell
 import QtQuick
-import Quickshell.Services.UPower
 
 PopupWindow {
     id: batteryPopup
     property bool isOpen: false
     required property var batteryModule
-    property bool isCharging: UPower.displayDevice.state === UPowerDeviceState.Charging
-    property bool isPlugged: UPower.displayDevice.state === UPowerDeviceState.Charging || UPower.displayDevice.state === UPowerDeviceState.FullyCharged
-    property bool isFull: UPower.displayDevice.state === UPowerDeviceState.FullyCharged
-    property var batteryPercentage: Math.round(UPower.displayDevice.percentage * 100) + "%"
-    property var timeToEmpty: formatTime(UPower.displayDevice.timeToEmpty)
-    property var timeToFull: formatTime(UPower.displayDevice.timeToFull)
 
     function toggle() {
         isOpen = !isOpen;
@@ -53,11 +46,11 @@ PopupWindow {
             anchors.centerIn: parent
             text: {
                 if (isCharging) {
-                    return batteryPercentage + " (" + timeToFull + " until full)";
+                    return batteryModule.batteryPercentage + " (" + batteryModule.timeToFull + " until full)";
                 } else if (isFull) {
-                    return batteryPercentage + " (full)";
+                    return batteryModule.batteryPercentage + " (full)";
                 } else {
-                    return batteryPercentage + " (" + timeToEmpty + " until empty)";
+                    return batteryModule.batteryPercentage + " (" + batteryModule.timeToEmpty + " until empty)";
                 }
             }
         }

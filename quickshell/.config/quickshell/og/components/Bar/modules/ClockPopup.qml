@@ -6,7 +6,6 @@ PopupWindow {
     id: clockPopup
     property bool isOpen: false
     required property var clockModule
-    property var date: Time.date
 
     function toggle() {
         isOpen = !isOpen;
@@ -37,7 +36,7 @@ PopupWindow {
             font.pixelSize: 16
             color: colors.on_surface_variant
             anchors.centerIn: parent
-            text: date
+            text: clockModule.date
         }
     }
 }

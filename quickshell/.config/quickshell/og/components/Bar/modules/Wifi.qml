@@ -1,9 +1,10 @@
 import QtQuick
 import Quickshell.Networking
 import Quickshell
-import qs.components.Services
+import qs.components.Bar.modules
 
 Text {
+    id: wifiModule
     property var wifiIcons: ["󰤯" // disconnected
         , "󰤟" // 1-25%
         , "󰤢" // 26-50%
@@ -47,12 +48,23 @@ Text {
     font.styleName: "Propo"
     font.pixelSize: 16
     color: colors.primary
+
+    WifiPopup {
+        id: wifiPopup
+        wifiModule: wifiModule
+    }
     MouseArea {
         anchors.fill: parent
         hoverEnabled: true
         onEntered: {
             cursorShape = Qt.PointingHandCursor;
+            wifiPopup.toggle();
         }
-        onClicked: Quickshell.execDetached(["bash", Quickshell.shellDir + "/scripts/open-nm-sidebar.sh"])
+        onExited: {
+            wifiPopup.toggle();
+        }
+        onClicked: {
+            Quickshell.execDetached(["bash", Quickshell.shellDir + "/scripts/open-nm-sidebar.sh"]);
+        }
     }
 }

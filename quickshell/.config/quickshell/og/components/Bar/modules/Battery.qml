@@ -8,10 +8,12 @@ Text {
 
     property var chargingIcons: ["󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]
 
-    property real batteryPercentage: UPower.displayDevice.percentage
-
     property bool isCharging: UPower.displayDevice.state === UPowerDeviceState.Charging
+    property bool isPlugged: UPower.displayDevice.state === UPowerDeviceState.Charging || UPower.displayDevice.state === UPowerDeviceState.FullyCharged
     property bool isFull: UPower.displayDevice.state === UPowerDeviceState.FullyCharged
+    property var batteryPercentage: Math.round(UPower.displayDevice.percentage * 100) + "%"
+    property var timeToEmpty: formatTime(UPower.displayDevice.timeToEmpty)
+    property var timeToFull: formatTime(UPower.displayDevice.timeToFull)
 
     text: {
         if (isFull) {
