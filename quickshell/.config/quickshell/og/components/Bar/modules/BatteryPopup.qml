@@ -38,11 +38,11 @@ PopupWindow {
             anchors.centerIn: parent
             text: {
                 if (isCharging) {
-                    return batteryModule.batteryPercentage + " (" + batteryModule.timeToFull + " until full)";
+                    return batteryModule.batteryPercentage + "% (" + batteryModule.timeToFull + " until full)";
                 } else if (isFull) {
-                    return batteryModule.batteryPercentage + " (full)";
+                    return batteryModule.batteryPercentage + "% (full)";
                 } else {
-                    return batteryModule.batteryPercentage + " (" + batteryModule.timeToEmpty + " until empty)";
+                    return batteryModule.batteryPercentage + "% (" + batteryModule.timeToEmpty + " until empty)";
                 }
             }
         }

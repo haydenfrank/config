@@ -11,7 +11,7 @@ Text {
     property bool isCharging: UPower.displayDevice.state === UPowerDeviceState.Charging
     property bool isPlugged: UPower.displayDevice.state === UPowerDeviceState.Charging || UPower.displayDevice.state === UPowerDeviceState.FullyCharged
     property bool isFull: UPower.displayDevice.state === UPowerDeviceState.FullyCharged
-    property var batteryPercentage: Math.round(UPower.displayDevice.percentage * 100) + "%"
+    property var batteryPercentage: Math.round(UPower.displayDevice.percentage * 100)
     property var timeToEmpty: formatTime(UPower.displayDevice.timeToEmpty)
     property var timeToFull: formatTime(UPower.displayDevice.timeToFull)
 
@@ -28,7 +28,7 @@ Text {
             return batteryIcons[10];
         }
         var icons = isCharging ? chargingIcons : batteryIcons;
-        var index = Math.floor(batteryPercentage * 10);
+        var index = Math.floor(batteryPercentage / 10);
         index = Math.max(0, Math.min(10, index));
         return icons[index] ? icons[index] : "";
     }
