@@ -1,0 +1,6 @@
+module qs.components.Wallpaper
+
+singleton ThumbnailCache 1.0 ThumbnailCache.qml
+Wallpaper 1.0 Wallpaper.qml
+WallpaperGrid 1.0 WallpaperGrid.qml
+WallpaperModel 1.0 WallpaperModel.qml
