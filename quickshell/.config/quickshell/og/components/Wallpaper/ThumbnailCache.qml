@@ -23,24 +23,11 @@ Item {
                     return path.length > 0;
                 });
 
-                console.log("Thumbnail scan found", files.length, "wallpapers");
-
                 for (var i = 0; i < files.length; ++i)
                     thumbnailCache.enqueue(files[i]);
 
                 thumbnailCache.processNext();
             }
-        }
-
-        stderr: StdioCollector {
-            onStreamFinished: {
-                if (text.length > 0)
-                    console.log("Thumbnail scan error:", text);
-            }
-        }
-
-        onExited: function (exitCode) {
-            console.log("Thumbnail scan exited:", exitCode);
         }
     }
 
@@ -59,22 +46,10 @@ Item {
                     return;
                 if (!thumbnailCache.isWallpaper(path))
                     return;
-                console.log("Wallpaper changed:", path);
 
                 thumbnailCache.enqueue(path);
                 thumbnailCache.processNext();
             }
-        }
-
-        stderr: StdioCollector {
-            onStreamFinished: {
-                if (text.length > 0)
-                    console.log("Wallpaper watcher error:", text);
-            }
-        }
-
-        onExited: function (exitCode) {
-            console.log("Wallpaper watcher exited:", exitCode);
         }
     }
 
@@ -83,23 +58,7 @@ Item {
 
         property string currentSource: ""
 
-        stdout: StdioCollector {
-            onStreamFinished: {
-                if (text.length > 0)
-                    console.log("magick:", text);
-            }
-        }
-
-        stderr: StdioCollector {
-            onStreamFinished: {
-                if (text.length > 0)
-                    console.log("magick error:", text);
-            }
-        }
-
-        onExited: function (exitCode) {
-            console.log("Thumbnail finished:", currentSource, "exit:", exitCode);
-
+        onExited: {
             thumbnailCache.processing = false;
             thumbnailCache.processNext();
         }
@@ -149,8 +108,6 @@ Item {
         }
 
         thumbnailCache.queue.push(input);
-
-        console.log("Queued thumbnail:", input);
     }
 
     function processNext() {
@@ -165,28 +122,18 @@ Item {
 
         generator.currentSource = input;
 
-        console.log("Generating thumbnail:", input);
-
         generator.command = ["sh", "-c", "mkdir -p \"$1\" && " + "if [ ! -f \"$2\" ] || [ \"$3\" -nt \"$2\" ]; then " + "magick \"$3\" " + "-thumbnail '400x300^' " + "-gravity center " + "-extent 400x300 " + "\"$2\"; " + "fi", "thumbnail", thumbnailCache.cacheDirectory, output, input];
 
         generator.running = true;
     }
 
     function scan() {
-        console.log("Scanning:", thumbnailCache.wallpaperDirectory);
-
         scanner.command = ["find", thumbnailCache.wallpaperDirectory, "-maxdepth", "1", "-type", "f", "(", "-iname", "*.jpg", "-o", "-iname", "*.jpeg", "-o", "-iname", "*.png", "-o", "-iname", "*.webp", ")"];
 
         scanner.running = true;
     }
 
     Component.onCompleted: {
-        console.log("ThumbnailCache started");
-
-        console.log("Wallpaper directory:", thumbnailCache.wallpaperDirectory);
-
-        console.log("Cache directory:", thumbnailCache.cacheDirectory);
-
         scan();
     }
 }

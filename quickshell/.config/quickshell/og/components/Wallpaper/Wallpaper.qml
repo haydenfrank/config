@@ -4,7 +4,7 @@ import Quickshell.Io
 import qs.config
 
 PanelWindow {
-    id: root
+    id: wallpaperWindow
 
     property bool opened: false
 
@@ -29,52 +29,12 @@ PanelWindow {
 
     Process {
         id: matugenProcess
-
-        stdout: StdioCollector {
-            onStreamFinished: {
-                console.log("matugen stdout:", this.text);
-            }
-        }
-
-        stderr: StdioCollector {
-            onStreamFinished: {
-                console.log("matugen stderr:", this.text);
-            }
-        }
-
-        onExited: function (exitCode, exitStatus) {
-            console.log("matugen exited:", exitCode);
-        }
     }
-
     IpcHandler {
         target: "wallpaper"
 
         function toggle() {
-            root.opened = !root.opened;
-        }
-
-        function close() {
-            root.opened = false;
-        }
-
-        function refresh() {
-            wallpaperModel.refresh();
-        }
-
-        function random() {
-            if (wallpaperModel.model.count === 0)
-                return;
-
-            var index = Math.floor(Math.random() * wallpaperModel.model.count);
-
-            var path = wallpaperModel.model.get(index, "fileURL");
-
-            root.setWallpaper(path);
-        }
-
-        function set(path) {
-            root.setWallpaper(path);
+            wallpaperWindow.opened = !wallpaperWindow.opened;
         }
     }
 
@@ -85,13 +45,11 @@ PanelWindow {
         if (path.startsWith("file://"))
             path = path.substring(7);
 
-        console.log("Running matugen:", path);
-
         matugenProcess.command = ["setsid", "-f", "matugen", "image", path, "--source-color-index", "0"];
 
         matugenProcess.running = true;
 
-        root.opened = false;
+        wallpaperWindow.opened = false;
     }
 
     // Transparent fullscreen click-catcher.
@@ -101,7 +59,7 @@ PanelWindow {
         anchors.fill: parent
 
         onClicked: {
-            root.opened = false;
+            wallpaperWindow.opened = false;
         }
 
         Rectangle {
@@ -134,7 +92,7 @@ PanelWindow {
                     wallpaperModel: wallpaperModel.model
 
                     onWallpaperSelected: function (path) {
-                        root.setWallpaper(path);
+                        wallpaperWindow.setWallpaper(path);
                     }
                 }
             }
@@ -142,8 +100,7 @@ PanelWindow {
     }
 
     Component.onCompleted: {
-        console.log("Wallpaper loaded");
-        console.log("Thumbnail cache:", ThumbnailCache.cacheDirectory);
+        ThumbnailCache;
     }
 
     onOpenedChanged: {

@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Io
 import qs.config
 import qs.components.Bar.modules
 import qs.components.Services
@@ -63,6 +64,14 @@ Scope {
                     }
                 }
             }
+        }
+    }
+
+    IpcHandler {
+        target: "bar"
+
+        function refresh(): void {
+            Quickshell.reload(false);
         }
     }
 }
