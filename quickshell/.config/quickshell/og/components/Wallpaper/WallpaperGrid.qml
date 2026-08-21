@@ -1,9 +1,16 @@
 import QtQuick
+import qs.config
 
 GridView {
     id: grid
 
+    Colors {
+        id: colors
+    }
+
     property var wallpaperModel
+
+    boundsBehavior: Flickable.StopAtBounds
 
     signal wallpaperSelected(string path)
 
@@ -14,42 +21,75 @@ GridView {
     cellHeight: height / rows
 
     model: wallpaperModel
-
     clip: true
 
-    delegate: Rectangle {
+    focus: true
+    activeFocusOnTab: true
+    keyNavigationEnabled: true
+    keyNavigationWraps: false
+    currentIndex: 0
+
+    delegate: Item {
+        id: delegateItem
+
+        required property int index
         required property url fileUrl
         required property string fileName
 
         width: grid.cellWidth
         height: grid.cellHeight
 
-        color: "gray"
+        Rectangle {
+            id: outerRect
 
-        Image {
-            anchors.fill: parent
-            anchors.margins: 4
+            anchors.centerIn: parent
 
-            source: ThumbnailCache.thumbnail(fileUrl)
+            width: parent.width - 6
+            height: parent.height - 6
 
-            fillMode: Image.PreserveAspectCrop
+            border.color: grid.currentIndex === index ? colors.primary : colors.outline_variant
 
-            asynchronous: true
-            cache: true
-        }
+            border.width: 2
+            color: colors.surface_container_high
+            radius: 18
 
-        MouseArea {
-            anchors.fill: parent
+            Rectangle {
+                anchors.fill: parent
+                anchors.margins: 18
 
-            onClicked: {
-                grid.wallpaperSelected(fileUrl.toString());
+                border.width: 2
+                border.color: colors.outline_variant
+
+                Image {
+                    id: thumbnailImage
+
+                    anchors.fill: parent
+                    anchors.margins: 2
+
+                    source: ThumbnailCache.thumbnail(fileUrl)
+
+                    fillMode: Image.PreserveAspectCrop
+                    cache: true
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+
+                onClicked: {
+                    if (grid.currentIndex !== index) {
+                        grid.currentIndex = index;
+                        grid.forceActiveFocus();
+                    } else {
+                        grid.wallpaperSelected(fileUrl.toString());
+                    }
+                }
             }
         }
     }
 
-    WheelHandler {
-        onWheel: function (event) {
-            grid.contentY -= event.angleDelta.y;
-        }
+    Keys.onReturnPressed: {
+        if (grid.currentItem)
+            grid.wallpaperSelected(grid.currentItem.fileUrl.toString());
     }
 }

@@ -117,4 +117,4 @@ hl.bind(
 
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd("~/.config/hypr/scripts/focus_mode.sh"))
 
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("killall waybar; uwsm app waybar"))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("qs -c og ipc call wallpaper toggle"))

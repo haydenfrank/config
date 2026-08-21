@@ -1,21 +1,27 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import qs.config
 
 PanelWindow {
     id: root
-    Component.onCompleted: {
-        console.log("Wallpaper loaded");
-        console.log("Thumbnail cache:", ThumbnailCache.cacheDirectory);
-    }
+
     property bool opened: false
 
     visible: opened
+    focusable: true
+    color: "transparent"
 
-    implicitWidth: 800
-    implicitHeight: 600
+    anchors {
+        top: true
+        bottom: true
+        left: true
+        right: true
+    }
 
-    color: "black"
+    Colors {
+        id: colors
+    }
 
     WallpaperModel {
         id: wallpaperModel
@@ -40,6 +46,7 @@ PanelWindow {
             console.log("matugen exited:", exitCode);
         }
     }
+
     IpcHandler {
         target: "wallpaper"
 
@@ -58,6 +65,7 @@ PanelWindow {
         function random() {
             if (wallpaperModel.model.count === 0)
                 return;
+
             var index = Math.floor(Math.random() * wallpaperModel.model.count);
 
             var path = wallpaperModel.model.get(index, "fileURL");
@@ -73,6 +81,7 @@ PanelWindow {
     function setWallpaper(path) {
         if (!path)
             return;
+
         if (path.startsWith("file://"))
             path = path.substring(7);
 
@@ -85,15 +94,63 @@ PanelWindow {
         root.opened = false;
     }
 
-    WallpaperGrid {
-        id: grid
+    // Transparent fullscreen click-catcher.
+    MouseArea {
+        id: outsideArea
 
         anchors.fill: parent
 
-        wallpaperModel: wallpaperModel.model
+        onClicked: {
+            root.opened = false;
+        }
 
-        onWallpaperSelected: function (path) {
-            wallpaper.setWallpaper(path);
+        Rectangle {
+            id: container
+
+            anchors.centerIn: parent
+
+            width: 800
+            height: 600
+
+            color: colors.surface_container
+            radius: 20
+            border.width: 2
+            border.color: colors.outline_variant
+
+            // Prevent clicks inside the panel from reaching outsideArea.
+            MouseArea {
+                anchors.fill: parent
+
+                onClicked: {
+                    mouse.accepted = true;
+                }
+
+                WallpaperGrid {
+                    id: grid
+
+                    anchors.fill: parent
+                    anchors.margins: 12
+
+                    wallpaperModel: wallpaperModel.model
+
+                    onWallpaperSelected: function (path) {
+                        root.setWallpaper(path);
+                    }
+                }
+            }
+        }
+    }
+
+    Component.onCompleted: {
+        console.log("Wallpaper loaded");
+        console.log("Thumbnail cache:", ThumbnailCache.cacheDirectory);
+    }
+
+    onOpenedChanged: {
+        if (opened) {
+            Qt.callLater(function () {
+                grid.forceActiveFocus();
+            });
         }
     }
 }
