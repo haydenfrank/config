@@ -137,7 +137,7 @@ hl.config({
 		focus_on_activate = true,
 	},
 	debug = {
-		vfr = 1,
+		vfr = true,
 	},
 })
 
@@ -154,7 +154,7 @@ hl.config({
 		zoom_rigid = false,
 		zoom_disable_aa = true,
 		hotspot_padding = 1,
-		no_warps = 1,
+		no_warps = true,
 		no_hardware_cursors = 1,
 	},
 })
@@ -167,7 +167,7 @@ hl.config({
 
 hl.config({
 	render = {
-		new_render_scheduling = 1,
+		new_render_scheduling = true,
 		direct_scanout = 2,
 	},
 })

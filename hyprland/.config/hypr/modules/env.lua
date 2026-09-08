@@ -26,8 +26,6 @@ hl.env("HYPRCURSOR_SIZE", "24")
 
 hl.env("__NV_DISABLE_EXPLICIT_SYNC", "1")
 hl.env("NVD_BACKEND", "direct")
-hl.env("LIBVA_DRIVER_NAME", "nvidia")
 hl.env("MOZ_ENABLE_WAYLAND", "1")
 hl.env("__NV_PRIME_RENDER_OFFLOAD", "1")
 hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
-hl.env("__VK_LAYER_NV_optimus", "NVIDIA_only")

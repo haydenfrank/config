@@ -24,7 +24,6 @@ if status is-interactive # Commands to run in interactive sessions can go here
     alias gco "git checkout"
     alias fd "fd -H"
     alias locate='fd -H -I "$argv" / 2>/dev/null'
-    alias grep "rg"
 end
 
 # opencode
