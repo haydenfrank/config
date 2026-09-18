@@ -36,6 +36,7 @@ do
         h = true,
         objectivec = true,
         qml = true,
+        python = true,
       }
       if enabled_filetypes[vim.bo[bufnr].filetype] then
         return { timeout_ms = 500 }
@@ -78,6 +79,7 @@ do
       hpp = { 'clang-format' },
       h = { 'clang-format' },
       qml = { 'qmlformat' },
+      python = { 'ruff_format' },
     },
   }
 

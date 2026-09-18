@@ -101,8 +101,6 @@ hl.bind("ALT + GRAVE", hl.dsp.send_shortcut({ mods = "", key = "F4", window = "c
 hl.bind(mainMod .. " + X", hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + SUPER_L", hl.dsp.exec_cmd("pgrep rofi && pkill rofi || rofi -show drun -show-icons"))
 
-hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("~/.config/hypr/scripts/wallpaper-selector.sh"))
-
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("steam"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("ELECTRON_OZONE_PLATFORM_HINT= discord"))
 hl.bind(
@@ -117,4 +115,4 @@ hl.bind(
 
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd("~/.config/hypr/scripts/focus_mode.sh"))
 
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("qs -c og ipc call wallpaper toggle"))
+hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("qs -c og ipc call wallpaper toggle"))

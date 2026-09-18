@@ -120,6 +120,7 @@ do
     clangd = {},
     bashls = {},
     ts_ls = {},
+    basedpyright = {},
     -- Special Lua Config, as recommended by neovim help docs
     lua_ls = {
       on_init = function(client)
@@ -187,6 +188,8 @@ do
     'html-lsp',
     'css-lsp',
     'stylua',
+    'ruff',
+    'basedpyright',
   })
 
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
