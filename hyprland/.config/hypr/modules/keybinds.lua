@@ -95,6 +95,7 @@ hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("playerctl play-pause"))
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(browser))
+hl.bind("Control_R", hl.dsp.exec_cmd("kitty -1 copilot"))
 
 hl.bind("ALT + grave", hl.dsp.global("discord:discord-toggle-deafen"), { non_consuming = true })
 
