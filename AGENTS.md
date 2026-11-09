@@ -15,6 +15,11 @@
 - Treat prompts beginning with `keybinds:` as requests to change a keybinding.
 - Before changing a keybinding, search all relevant repository configs and inspect
   live bindings with `hyprctl binds` when Hyprland is running.
+- Hyprland keybindings live in `hyprland/.config/hypr/modules/keybinds.lua`;
+  preserve the existing `hl.bind(...)` and `hl.dsp` style when editing them.
+- For a keybinding change, identify the existing action rather than duplicating
+  it, replace only its key unless the user requests an action change, and verify
+  the live binding after reload.
 - Check for conflicts across Hyprland, Fish, Kitty, Quickshell, Waybar, Rofi,
   and other affected tools. Report conflicts or uncertain global/application
   shortcuts before making a risky change.
