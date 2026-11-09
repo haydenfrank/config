@@ -10,6 +10,12 @@
 - Preserve unrelated user changes; do not reset, discard, or rewrite existing work.
 - Prefer the repository's existing structure and configuration style over introducing new tooling.
 
+## Available skills
+
+- **customize-cloud-agent:** Use when configuring the Copilot cloud agent, setup steps, runners, or preinstalled tools.
+- **github-pr-media:** Use when adding screenshots, diagrams, recordings, or other media to a GitHub pull request or comment.
+- **pr-stack:** Use when creating, splitting, extending, restacking, rebasing, or landing dependent pull request stacks.
+
 ## Task triggers and change checks
 
 - Treat prompts beginning with `keybinds:` as requests to change a keybinding.
