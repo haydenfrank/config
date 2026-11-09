@@ -80,3 +80,5 @@ end
 
 vim.keymap.set({ 'n', 'v' }, 'd', '"_d', { desc = 'Delete without copying to register' })
 vim.keymap.set('n', '<leader>cd', vim.cmd.Ex, { desc = 'Open current directory in netrw' })
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code action' })
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename symbol' })

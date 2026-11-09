@@ -17,7 +17,7 @@ hl.env("XDG_MENU_PREFIX", "plasma-")
 hl.env("TERMINAL", "kitty -1")
 
 hl.env("WLR_DRM_NO_ATOMIC", "1")
-hl.env("WLR_NO_HARDWARE_CURSORS", "1")
+hl.env("WLR_NO_HARDWARE_CURSORS", "0")
 
 hl.env("XCURSOR_THEME", "breeze_cursors")
 hl.env("XCURSOR_SIZE", "24")

@@ -155,7 +155,7 @@ hl.config({
 		zoom_disable_aa = true,
 		hotspot_padding = 1,
 		no_warps = true,
-		no_hardware_cursors = 1,
+		no_hardware_cursors = 0,
 	},
 })
 

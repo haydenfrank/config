@@ -13,13 +13,3 @@ hl.monitor({
 	position = "0x0",
 	scale = 1.0,
 })
-
-hl.workspace_rule({
-	workspace = "2",
-	monitor = "eDP-1",
-})
-
-hl.workspace_rule({
-	workspace = "1",
-	monitor = "DP-3",
-})

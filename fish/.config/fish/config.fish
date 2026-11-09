@@ -11,9 +11,10 @@ if status is-interactive # Commands to run in interactive sessions can go here
     # No greeting
     set fish_greeting
     set fish_transient_prompt 1
-
+    
     # Use starship
     starship init fish | source
+    zoxide init --cmd cd fish | source 
 
     # Aliases
     alias clear "pyroclear" # fix: kitty doesn't clear properly
@@ -25,6 +26,8 @@ if status is-interactive # Commands to run in interactive sessions can go here
     alias fd "fd -H"
     alias locate='fd -H -I "$argv" / 2>/dev/null'
 end
+
+set -gx LS_COLORS "$LS_COLORS:ow=01;34:tw=01;34:"
 
 # opencode
 fish_add_path $HOME/.opencode/bin

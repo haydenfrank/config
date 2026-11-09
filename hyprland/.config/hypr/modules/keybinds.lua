@@ -2,7 +2,7 @@
 ---- KEYBINDINGS ----
 ---------------------
 
-local terminal = "kitty -1"
+local terminal = "kitty"
 local fileManager = "nautilus"
 local browser = "brave"
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
@@ -96,13 +96,13 @@ hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(browser))
 
-hl.bind("ALT + GRAVE", hl.dsp.send_shortcut({ mods = "", key = "F4", window = "class:^(discord)$" }))
+hl.bind("F9", hl.dsp.global("discord:discord-toggle-deafen"), { non_consuming = true })
 
 hl.bind(mainMod .. " + X", hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + SUPER_L", hl.dsp.exec_cmd("pgrep rofi && pkill rofi || rofi -show drun -show-icons"))
 
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("steam"))
-hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("ELECTRON_OZONE_PLATFORM_HINT= discord"))
+hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("discord"))
 hl.bind(
 	mainMod .. " + T",
 	hl.dsp.exec_cmd("flatpak run com.spotify.Client --remote-debugging-port=9222 --remote-allow-origins='*'")
@@ -110,9 +110,13 @@ hl.bind(
 hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen({ mode = "maximized" }))
 hl.bind(
 	mainMod .. " + SHIFT + S",
-	hl.dsp.exec_cmd("grimblast copysave area ~/Pictures/Screenshots/screenshot-$(date +%Y-%m-%d-%H-%M).png")
+	hl.dsp.exec_cmd(
+		"GRIMBLAST_HIDE_CURSOR=1 grimblast copysave area ~/Pictures/Screenshots/screenshot-$(date +%Y-%m-%d-%H-%M).png"
+	)
 )
 
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd("~/.config/hypr/scripts/focus_mode.sh"))
 
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("qs -c og ipc call wallpaper toggle"))
+hl.bind("F10", hl.dsp.pass({ window = [[class:com\.obsproject\.Studio]] }))
+hl.bind(mainMod .. "+ R", hl.dsp.pass({ window = [[class:com\.obsproject\.Studio]] }))
