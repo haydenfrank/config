@@ -96,7 +96,7 @@ hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(browser))
 
-hl.bind("ALT + grave", hl.dsp.global("discord:discord-toggle-deafen"), { non_consuming = true })
+hl.bind("F9", hl.dsp.global("discord:discord-toggle-deafen"), { non_consuming = true })
 
 hl.bind(mainMod .. " + X", hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + SUPER_L", hl.dsp.exec_cmd("pgrep rofi && pkill rofi || rofi -show drun -show-icons"))
