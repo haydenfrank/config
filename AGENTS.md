@@ -4,10 +4,27 @@
 
 - This repository is `haydenfrank/config`, a symlink-oriented Linux dotfiles repository.
 - Never edit files outside this repository.
-- Commit after each working change. Keep commits focused and include a clear message.
+- Commit after each validated, working change. Keep commits focused and include a clear message.
+- Treat `git commit` as a local operation. Push to GitHub only when the user explicitly requests it.
 - Ask before installing packages, dependencies, or system tools.
 - Preserve unrelated user changes; do not reset, discard, or rewrite existing work.
 - Prefer the repository's existing structure and configuration style over introducing new tooling.
+
+## Task triggers and change checks
+
+- Treat prompts beginning with `keybinds:` as requests to change a keybinding.
+- Before changing a keybinding, search all relevant repository configs and inspect
+  live bindings with `hyprctl binds` when Hyprland is running.
+- Check for conflicts across Hyprland, Fish, Kitty, Quickshell, Waybar, Rofi,
+  and other affected tools. Report conflicts or uncertain global/application
+  shortcuts before making a risky change.
+- After every edit, run `git diff --check` and the smallest relevant validation
+  command. For Hyprland changes, use `hyprctl reload` followed by
+  `hyprctl configerrors` when the compositor is available.
+- Do not commit until the relevant validation passes. Report failed or skipped
+  checks explicitly.
+- When a GitHub update is requested, commit the validated change first, then
+  push the intended branch to its configured remote.
 
 ## Stack
 
