@@ -37,6 +37,17 @@
 - When a GitHub update is requested, commit the validated change first, then
   push the intended branch to its configured remote.
 
+## Hyprland reference
+
+Use the official Hyprland wiki for configuration syntax and current behavior:
+
+- https://wiki.hypr.land/
+- https://wiki.hypr.land/Configuring/
+- https://wiki.hypr.land/Configuring/Variables/
+
+Prefer the repository's existing Hyprland patterns over examples from older
+documentation.
+
 ## Stack
 
 - **Desktop/session:** Hyprland, Hyprlock, Hypridle, systemd user services
