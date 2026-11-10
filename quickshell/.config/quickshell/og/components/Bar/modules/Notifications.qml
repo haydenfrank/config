@@ -14,6 +14,22 @@ Scope {
         id: notificationModel
     }
 
+    function activeScreen() {
+        const focusedMonitor = Hyprland.focusedMonitor;
+        return Quickshell.screens.find(screen => screen.name === focusedMonitor?.name)
+            || Quickshell.screens[0];
+    }
+
+    function hasNotificationsFor(screenName) {
+        for (let index = 0; index < notificationModel.count; index++) {
+            if (notificationModel.get(index).screenName === screenName) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     Colors {
         id: colors
     }
@@ -34,7 +50,11 @@ Scope {
         onNotification: notification => {
             notification.tracked = true;
 
-            notificationModel.append({ notification: notification });
+            const targetScreen = root.activeScreen();
+            notificationModel.append({
+                notification: notification,
+                screenName: targetScreen?.name || ""
+            });
             notification.closed.connect(() => {
                 for (let index = 0; index < notificationModel.count; index++) {
                     if (notificationModel.get(index).notification === notification) {
@@ -46,176 +66,180 @@ Scope {
         }
     }
 
-    PanelWindow {
-        id: notificationWindow
+    Variants {
+        model: Quickshell.screens
 
-        screen: {
-            const focusedMonitor = Hyprland.focusedMonitor;
-            return Quickshell.screens.find(screen => screen.name === focusedMonitor?.name)
-                || Quickshell.screens[0];
-        }
-        color: "transparent"
-        visible: notificationModel.count > 0
-        implicitWidth: 420
-        implicitHeight: Math.min(900, notificationList.contentHeight + 24)
+        PanelWindow {
+            id: notificationWindow
 
-        WlrLayershell.namespace: "notifications"
-        WlrLayershell.layer: WlrLayer.Overlay
-        WlrLayershell.exclusiveZone: 0
+            required property var modelData
 
-        anchors {
-            top: true
-            right: true
-        }
+            screen: modelData
+            color: "transparent"
+            visible: root.hasNotificationsFor(modelData.name)
+            implicitWidth: 420
+            implicitHeight: Math.min(900, notificationList.contentHeight + 24)
 
-        ListView {
-            id: notificationList
+            WlrLayershell.namespace: "notifications"
+            WlrLayershell.layer: WlrLayer.Overlay
+            WlrLayershell.exclusiveZone: 0
 
             anchors {
-                fill: parent
-                margins: 12
+                top: true
+                right: true
             }
 
-            spacing: 10
-            model: notificationModel
-            interactive: contentHeight > height
-            boundsBehavior: Flickable.StopAtBounds
+            ListView {
+                id: notificationList
 
-            delegate: Rectangle {
-                required property var notification
-
-                width: notificationList.width
-                implicitHeight: notificationContent.implicitHeight + 24
-                opacity: 1
-                radius: 16
-                color: notification.urgency === NotificationUrgency.Critical
-                    ? colors.error_container
-                    : colors.surface_container
-                border.color: colors.outline_variant
-                border.width: 1
-
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: 300
-                    }
+                anchors {
+                    fill: parent
+                    margins: 12
                 }
 
-                Timer {
-                    interval: 10000
-                    running: true
+                spacing: 0
+                model: notificationModel
+                interactive: contentHeight > height
+                boundsBehavior: Flickable.StopAtBounds
 
-                    onTriggered: {
-                        parent.opacity = 0;
-                        removeTimer.start();
-                    }
-                }
+                delegate: Rectangle {
+                    required property var notification
+                    required property string screenName
 
-                Timer {
-                    id: removeTimer
-                    interval: 300
+                    width: notificationList.width
+                    implicitHeight: notificationContent.implicitHeight + 24
+                    height: screenName === notificationWindow.modelData.name ? implicitHeight : 0
+                    opacity: 1
+                    radius: 16
+                    color: notification.urgency === NotificationUrgency.Critical
+                        ? colors.error_container
+                        : colors.surface_container
+                    border.color: colors.outline_variant
+                    border.width: 1
 
-                    onTriggered: notification.expire()
-                }
-
-                RowLayout {
-                    id: notificationContent
-
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        top: parent.top
-                        margins: 12
-                    }
-
-                    spacing: 10
-
-                    IconImage {
-                        Layout.preferredWidth: 42
-                        Layout.preferredHeight: 42
-                        source: notification.image || notification.appIcon
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: 300
+                        }
                     }
 
-                    ColumnLayout {
-                        Layout.fillWidth: true
-                        spacing: 4
+                    Timer {
+                        interval: 10000
+                        running: screenName === notificationWindow.modelData.name
 
-                        Text {
-                            Layout.fillWidth: true
-                            text: notification.summary
-                            color: colors.on_surface
-                            font.bold: true
-                            elide: Text.ElideRight
-                            maximumLineCount: 1
+                        onTriggered: {
+                            parent.opacity = 0;
+                            removeTimer.start();
+                        }
+                    }
+
+                    Timer {
+                        id: removeTimer
+                        interval: 300
+
+                        onTriggered: notification.expire()
+                    }
+
+                    RowLayout {
+                        id: notificationContent
+
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            top: parent.top
+                            margins: 12
                         }
 
-                        Text {
-                            Layout.fillWidth: true
-                            text: notification.body
-                            color: colors.on_surface_variant
-                            wrapMode: Text.Wrap
-                            maximumLineCount: 4
+                        spacing: 10
+
+                        IconImage {
+                            Layout.preferredWidth: 42
+                            Layout.preferredHeight: 42
+                            source: notification.image || notification.appIcon
                         }
 
-                        RowLayout {
+                        ColumnLayout {
                             Layout.fillWidth: true
-                            spacing: 6
+                            spacing: 4
 
                             Text {
                                 Layout.fillWidth: true
-                                text: notification.appName
-                                color: colors.outline
-                                font.pixelSize: 11
+                                text: notification.summary
+                                color: colors.on_surface
+                                font.bold: true
                                 elide: Text.ElideRight
+                                maximumLineCount: 1
                             }
 
-                            Repeater {
-                                model: notification.actions
+                            Text {
+                                Layout.fillWidth: true
+                                text: notification.body
+                                color: colors.on_surface_variant
+                                wrapMode: Text.Wrap
+                                maximumLineCount: 4
+                            }
 
-                                delegate: Rectangle {
-                                    required property var modelData
+                            RowLayout {
+                                Layout.fillWidth: true
+                                spacing: 6
 
-                                    implicitWidth: actionLabel.implicitWidth + 16
+                                Text {
+                                    Layout.fillWidth: true
+                                    text: notification.appName
+                                    color: colors.outline
+                                    font.pixelSize: 11
+                                    elide: Text.ElideRight
+                                }
+
+                                Repeater {
+                                    model: notification.actions
+
+                                    delegate: Rectangle {
+                                        required property var modelData
+
+                                        implicitWidth: actionLabel.implicitWidth + 16
+                                        implicitHeight: 26
+                                        radius: 13
+                                        color: colors.primary_container
+
+                                        Text {
+                                            id: actionLabel
+
+                                            anchors.centerIn: parent
+                                            text: modelData.text
+                                            color: colors.on_primary_container
+                                            font.pixelSize: 11
+                                        }
+
+                                        MouseArea {
+                                            anchors.fill: parent
+                                            onClicked: modelData.invoke()
+                                        }
+                                    }
+                                }
+
+                                Rectangle {
+                                    implicitWidth: 26
                                     implicitHeight: 26
                                     radius: 13
-                                    color: colors.primary_container
+                                    color: closeMouse.containsMouse
+                                        ? colors.surface_container_highest
+                                        : "transparent"
 
                                     Text {
-                                        id: actionLabel
-
                                         anchors.centerIn: parent
-                                        text: modelData.text
-                                        color: colors.on_primary_container
-                                        font.pixelSize: 11
+                                        text: "\u00d7"
+                                        color: colors.on_surface_variant
+                                        font.pixelSize: 18
                                     }
 
                                     MouseArea {
+                                        id: closeMouse
+
                                         anchors.fill: parent
-                                        onClicked: modelData.invoke()
+                                        hoverEnabled: true
+                                        onClicked: notification.dismiss()
                                     }
-                                }
-                            }
-
-                            Rectangle {
-                                implicitWidth: 26
-                                implicitHeight: 26
-                                radius: 13
-                                color: closeMouse.containsMouse
-                                    ? colors.surface_container_highest
-                                    : "transparent"
-
-                                Text {
-                                    anchors.centerIn: parent
-                                    text: "\u00d7"
-                                    color: colors.on_surface_variant
-                                    font.pixelSize: 18
-                                }
-
-                                MouseArea {
-                                    id: closeMouse
-
-                                    anchors.fill: parent
-                                    hoverEnabled: true
-                                    onClicked: notification.dismiss()
                                 }
                             }
                         }
