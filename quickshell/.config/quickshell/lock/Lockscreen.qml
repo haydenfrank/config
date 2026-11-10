@@ -25,8 +25,9 @@ Item {
             anchors.fill: parent
             source: root.wallpaper
             fillMode: Image.PreserveAspectCrop
-            asynchronous: false
+            asynchronous: true
             cache: true
+            sourceSize.width: 2560
             opacity: 0.5
         }
 

@@ -65,7 +65,10 @@ ShellRoot {
         source: root.wallpaperPath
         asynchronous: false
         cache: true
-        visible: false
+        sourceSize.width: 2560
+        width: 1
+        height: 1
+        opacity: 0
     }
 
     PamContext {
