@@ -4,6 +4,8 @@ Item {
     id: root
 
     property bool primary: false
+    property bool fadingOut: false
+    property bool loaded: false
     property string wallpaper: ""
     property color timeColor: "#dee3e6"
     property color dateColor: "#bfc8cc"
@@ -16,6 +18,17 @@ Item {
 
     signal passwordSubmitted(string password)
     signal powerAction(string action)
+
+    opacity: loaded && !fadingOut ? 1 : 0
+
+    Behavior on opacity {
+        NumberAnimation {
+            duration: 250
+            easing.type: Easing.InOutCubic
+        }
+    }
+
+    Component.onCompleted: loaded = true
 
     Rectangle {
         anchors.fill: parent

@@ -8,6 +8,7 @@ ShellRoot {
     id: root
 
     property bool lockRequested: false
+    property bool fadingOut: false
     property string statusText: "Input Password or Scan Fingerprint..."
     property bool statusIsError: false
     property string colorText: ""
@@ -90,7 +91,8 @@ ShellRoot {
 
         onCompleted: function (result) {
             if (result === PamResult.Success) {
-                root.lockRequested = false;
+                root.fadingOut = true;
+                unlockTimer.start();
             } else {
                 root.statusText = result === PamResult.MaxTries
                     ? "Authentication temporarily unavailable"
@@ -121,6 +123,7 @@ ShellRoot {
 
                 primary: Quickshell.screens.length === 1
                     || parent.screen.name === Quickshell.screens[0].name
+                fadingOut: root.fadingOut
                 wallpaper: root.wallpaperPath
                 timeColor: root.color("on_surface", "#dee3e6")
                 dateColor: root.color("on_surface_variant", "#bfc8cc")
@@ -148,6 +151,18 @@ ShellRoot {
 
     Process {
         id: powerProcess
+    }
+
+    Timer {
+        id: unlockTimer
+
+        interval: 250
+        repeat: false
+
+        onTriggered: {
+            root.lockRequested = false;
+            root.fadingOut = false;
+        }
     }
 
     IpcHandler {
