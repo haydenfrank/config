@@ -9,6 +9,10 @@ import qs.config
 Scope {
     id: root
 
+    ListModel {
+        id: notificationModel
+    }
+
     Colors {
         id: colors
     }
@@ -28,6 +32,16 @@ Scope {
 
         onNotification: notification => {
             notification.tracked = true;
+
+            notificationModel.append({ notification: notification });
+            notification.closed.connect(() => {
+                for (let index = 0; index < notificationModel.count; index++) {
+                    if (notificationModel.get(index).notification === notification) {
+                        notificationModel.remove(index);
+                        break;
+                    }
+                }
+            });
         }
     }
 
@@ -36,7 +50,7 @@ Scope {
 
         screen: Quickshell.screens[0]
         color: "transparent"
-        visible: server.trackedNotifications.count > 0
+        visible: notificationModel.count > 0
         implicitWidth: 420
         implicitHeight: Math.min(900, notificationList.contentHeight + 24)
 
@@ -58,17 +72,17 @@ Scope {
             }
 
             spacing: 10
-            model: server.trackedNotifications
+            model: notificationModel
             interactive: contentHeight > height
             boundsBehavior: Flickable.StopAtBounds
 
             delegate: Rectangle {
-                required property var modelData
+                required property var notification
 
                 width: notificationList.width
                 implicitHeight: notificationContent.implicitHeight + 24
                 radius: 16
-                color: modelData.urgency === NotificationUrgency.Critical
+                color: notification.urgency === NotificationUrgency.Critical
                     ? colors.error_container
                     : colors.surface_container
                 border.color: colors.outline_variant
@@ -89,7 +103,7 @@ Scope {
                     IconImage {
                         Layout.preferredWidth: 42
                         Layout.preferredHeight: 42
-                        source: modelData.image || modelData.appIcon
+                        source: notification.image || notification.appIcon
                     }
 
                     ColumnLayout {
@@ -98,7 +112,7 @@ Scope {
 
                         Text {
                             Layout.fillWidth: true
-                            text: modelData.summary
+                            text: notification.summary
                             color: colors.on_surface
                             font.bold: true
                             elide: Text.ElideRight
@@ -107,7 +121,7 @@ Scope {
 
                         Text {
                             Layout.fillWidth: true
-                            text: modelData.body
+                            text: notification.body
                             color: colors.on_surface_variant
                             wrapMode: Text.Wrap
                             maximumLineCount: 4
@@ -119,14 +133,14 @@ Scope {
 
                             Text {
                                 Layout.fillWidth: true
-                                text: modelData.appName
+                                text: notification.appName
                                 color: colors.outline
                                 font.pixelSize: 11
                                 elide: Text.ElideRight
                             }
 
                             Repeater {
-                                model: modelData.actions
+                                model: notification.actions
 
                                 delegate: Rectangle {
                                     required property var modelData
@@ -147,7 +161,7 @@ Scope {
 
                                     MouseArea {
                                         anchors.fill: parent
-                                        onClicked: modelData.invoke()
+                                            onClicked: modelData.invoke()
                                     }
                                 }
                             }
@@ -172,7 +186,7 @@ Scope {
 
                                     anchors.fill: parent
                                     hoverEnabled: true
-                                    onClicked: modelData.dismiss()
+                                    onClicked: notification.dismiss()
                                 }
                             }
                         }
