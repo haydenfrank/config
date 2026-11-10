@@ -2,7 +2,12 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Pam
 import Quickshell.Wayland
+import QtQml
 import QtQuick
+import "lock"
+import qs.components.Bar
+import qs.components.Bar.modules
+import qs.components.Wallpaper
 
 ShellRoot {
     id: root
@@ -46,6 +51,12 @@ ShellRoot {
         } else if (!pam.active) {
             beginAuthentication();
         }
+    }
+
+    Scope {
+        Bar {}
+        Notifications {}
+        Wallpaper {}
     }
 
     FileView {

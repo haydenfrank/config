@@ -124,6 +124,6 @@ hl.bind(
 
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd("~/.config/hypr/scripts/focus_mode.sh"))
 
-hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("qs -c og ipc call wallpaper toggle"))
+hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("qs ipc call wallpaper toggle"))
 hl.bind("F10", hl.dsp.pass({ window = [[class:com\.obsproject\.Studio]] }))
 hl.bind(mainMod .. "+ R", hl.dsp.pass({ window = [[class:com\.obsproject\.Studio]] }))

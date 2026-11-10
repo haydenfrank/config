@@ -79,8 +79,9 @@ when a key is released rather than pressed.
   `AppSearch.guessIcon` only when it resolves to a real icon, and omit the icon
   item when no icon is available.
 - Notification popups fade after 10 seconds, then call `notification.expire()`.
-- The lock screen lives in `quickshell/.config/quickshell/lock/` and uses
-  `WlSessionLock`/`WlSessionLockSurface` with `Quickshell.Services.Pam`; keep
+- The combined Quickshell entrypoint lives at
+  `quickshell/.config/quickshell/shell.qml`; it owns both the `og` desktop
+  modules and the lock screen in `quickshell/.config/quickshell/lock/`. Keep
   `hypridle.conf` pointed at its `lockScreen` IPC handler rather than launching
   a second locker process.
 
