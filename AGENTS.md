@@ -48,6 +48,16 @@ Use the official Hyprland wiki for configuration syntax and current behavior:
 Prefer the repository's existing Hyprland patterns over examples from older
 documentation.
 
+## Quickshell reference
+
+- Desktop notifications use `Quickshell.Services.Notifications.NotificationServer`
+  in `quickshell/.config/quickshell/og/components/Bar/modules/Notifications.qml`;
+  do not reintroduce SwayNC for notification delivery.
+- Capture `Hyprland.focusedMonitor` when each notification arrives and store its
+  screen name. Render per-screen `PanelWindow` variants so existing notifications
+  stay on their arrival monitor when focus changes.
+- Notification popups fade after 10 seconds, then call `notification.expire()`.
+
 ## Stack
 
 - **Desktop/session:** Hyprland, Hyprlock, Hypridle, systemd user services
