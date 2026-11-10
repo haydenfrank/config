@@ -7,7 +7,7 @@ import QtQuick
 ShellRoot {
     id: root
 
-    property bool lockRequested: true
+    property bool lockRequested: false
     property string statusText: "Input Password or Scan Fingerprint..."
     property bool statusIsError: false
     property string colorText: ""
@@ -150,6 +150,5 @@ ShellRoot {
 
     Component.onCompleted: {
         colorsFile.reload();
-        root.beginAuthentication();
     }
 }
