@@ -41,7 +41,12 @@ Scope {
             return appIcon;
         }
 
-        return Quickshell.iconPath(AppSearch.guessIcon(notification.appName), "image-missing");
+        const guessedIcon = AppSearch.guessIcon(notification.appName);
+        if (guessedIcon === "application-x-executable" || guessedIcon === "image-missing") {
+            return "";
+        }
+
+        return Quickshell.iconPath(guessedIcon, true);
     }
 
     Colors {
@@ -170,6 +175,7 @@ Scope {
                             Layout.preferredWidth: 42
                             Layout.preferredHeight: 42
                             source: root.iconSourceFor(notification)
+                            visible: source !== ""
                             mipmap: true
                         }
 

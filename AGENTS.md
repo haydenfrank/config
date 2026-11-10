@@ -60,8 +60,9 @@ documentation.
 - Capture `Hyprland.focusedMonitor` when each notification arrives and store its
   screen name. Render per-screen `PanelWindow` variants so existing notifications
   stay on their arrival monitor when focus changes.
-- Resolve notification app icon names with `Quickshell.iconPath` and fall back
-  to `AppSearch.guessIcon` before assigning them to `IconImage`.
+- Resolve notification app icon names with `Quickshell.iconPath`, use
+  `AppSearch.guessIcon` only when it resolves to a real icon, and omit the icon
+  item when no icon is available.
 - Notification popups fade after 10 seconds, then call `notification.expire()`.
 
 ## Stack
