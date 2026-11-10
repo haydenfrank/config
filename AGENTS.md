@@ -9,6 +9,8 @@
 - Ask before installing packages, dependencies, or system tools.
 - Preserve unrelated user changes; do not reset, discard, or rewrite existing work.
 - Prefer the repository's existing structure and configuration style over introducing new tooling.
+- After completing a change, add durable repository-specific knowledge learned during
+  the task to this file before finishing, and validate and commit that update.
 
 ## Available skills
 
