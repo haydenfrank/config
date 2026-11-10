@@ -6,6 +6,7 @@ import Quickshell.Services.Notifications
 import Quickshell.Wayland
 import Quickshell.Widgets
 import qs.config
+import qs.components.Services
 
 Scope {
     id: root
@@ -28,6 +29,19 @@ Scope {
         }
 
         return false;
+    }
+
+    function iconSourceFor(notification) {
+        if (notification.image) {
+            return notification.image;
+        }
+
+        const appIcon = Quickshell.iconPath(notification.appIcon, true);
+        if (appIcon) {
+            return appIcon;
+        }
+
+        return Quickshell.iconPath(AppSearch.guessIcon(notification.appName), "image-missing");
     }
 
     Colors {
@@ -155,7 +169,8 @@ Scope {
                         IconImage {
                             Layout.preferredWidth: 42
                             Layout.preferredHeight: 42
-                            source: notification.image || notification.appIcon
+                            source: root.iconSourceFor(notification)
+                            mipmap: true
                         }
 
                         ColumnLayout {
