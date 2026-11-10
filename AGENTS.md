@@ -26,7 +26,7 @@
 - For a keybinding change, identify the existing action rather than duplicating
   it, replace only its key unless the user requests an action change, and verify
   the live binding after reload.
-- Check for conflicts across Hyprland, Fish, Kitty, Quickshell, Waybar, Rofi,
+- Check for conflicts across Hyprland, Fish, Kitty, Quickshell, Rofi,
   and other affected tools. Report conflicts or uncertain global/application
   shortcuts before making a risky change.
 - After every edit, run `git diff --check` and the smallest relevant validation
@@ -53,7 +53,7 @@ documentation.
 - **Desktop/session:** Hyprland, Hyprlock, Hypridle, systemd user services
 - **Shell and CLI:** Fish, Starship, Zoxide, Tmux, NVM, Eza, FD, Pyroclear
 - **Terminal/editor:** Kitty and Neovim
-- **Desktop UI:** Quickshell, Waybar, SwayNC, Rofi
+- **Desktop UI:** Quickshell, SwayNC, Rofi
 - **Theming:** Matugen, GTK 3/4, KDE/Kvantum, Spicetify
 - **Utilities:** btop and Fastfetch
 - **Desktop integration:** MIME associations and `.desktop` launchers
@@ -79,7 +79,6 @@ Top-level directories are deployable packages whose contents mirror paths below 
 | `spicetify/` | Spotify configuration and themes |
 | `starship/` | Starship prompt configuration |
 | `swaync/` | SwayNC configuration, styling, themes, and icons |
-| `waybar/` | Waybar configuration, styling, modules, and launch script |
 
 Most package roots are linked into `~/.config`. Kitty uses per-file links under
 `~/.config/kitty`; `kdeglobals`, the Hyprland systemd target, the Neovim desktop
@@ -111,9 +110,6 @@ kitty +kitten themes --reload-in=all Matugen
 
 # Neovim color reload for running instances
 pkill -SIGUSR1 nvim
-
-# Restart Waybar and SwayNC using the repository script
-~/.config/waybar/scripts/launch.sh
 
 # Restart the current Fish session
 exec fish
