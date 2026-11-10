@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Services.Notifications
 import Quickshell.Wayland
 import Quickshell.Widgets
@@ -48,7 +49,11 @@ Scope {
     PanelWindow {
         id: notificationWindow
 
-        screen: Quickshell.screens[0]
+        screen: {
+            const focusedMonitor = Hyprland.focusedMonitor;
+            return Quickshell.screens.find(screen => screen.name === focusedMonitor?.name)
+                || Quickshell.screens[0];
+        }
         color: "transparent"
         visible: notificationModel.count > 0
         implicitWidth: 420
@@ -81,12 +86,36 @@ Scope {
 
                 width: notificationList.width
                 implicitHeight: notificationContent.implicitHeight + 24
+                opacity: 1
                 radius: 16
                 color: notification.urgency === NotificationUrgency.Critical
                     ? colors.error_container
                     : colors.surface_container
                 border.color: colors.outline_variant
                 border.width: 1
+
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 300
+                    }
+                }
+
+                Timer {
+                    interval: 10000
+                    running: true
+
+                    onTriggered: {
+                        parent.opacity = 0;
+                        removeTimer.start();
+                    }
+                }
+
+                Timer {
+                    id: removeTimer
+                    interval: 300
+
+                    onTriggered: notification.expire()
+                }
 
                 RowLayout {
                     id: notificationContent
@@ -161,7 +190,7 @@ Scope {
 
                                     MouseArea {
                                         anchors.fill: parent
-                                            onClicked: modelData.invoke()
+                                        onClicked: modelData.invoke()
                                     }
                                 }
                             }
