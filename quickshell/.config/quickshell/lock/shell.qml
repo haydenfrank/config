@@ -62,7 +62,7 @@ ShellRoot {
     PamContext {
         id: pam
 
-        config: "hyprlock"
+        config: "system-local-login"
 
         onPamMessage: {
             if (pam.responseRequired) {
@@ -107,7 +107,8 @@ ShellRoot {
             Lockscreen {
                 anchors.fill: parent
 
-                primary: parent.screen === Quickshell.screens[0]
+                primary: Quickshell.screens.length === 1
+                    || parent.screen.name === Quickshell.screens[0].name
                 wallpaper: root.wallpaperPath
                 timeColor: root.color("on_surface", "#dee3e6")
                 dateColor: root.color("on_surface_variant", "#bfc8cc")

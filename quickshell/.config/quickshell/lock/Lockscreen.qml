@@ -44,7 +44,7 @@ Item {
         color: root.timeColor
         font.family: "SF Pro"
         font.pixelSize: 95
-        font.weight: Font.ExtraBlack
+        font.weight: Font.Black
 
         Timer {
             interval: 1000
@@ -100,6 +100,7 @@ Item {
             echoMode: TextInput.Password
             passwordCharacter: "•"
             selectByMouse: false
+            focus: true
             activeFocusOnPress: true
 
             onAccepted: {
@@ -107,7 +108,16 @@ Item {
                 passwordInput.text = "";
             }
 
-            Component.onCompleted: forceActiveFocus()
+            Component.onCompleted: Qt.callLater(function () {
+                forceActiveFocus();
+            })
+
+            Timer {
+                interval: 100
+                running: true
+                repeat: false
+                onTriggered: passwordInput.forceActiveFocus()
+            }
         }
 
         Text {
