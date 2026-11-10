@@ -118,6 +118,8 @@ ShellRoot {
         }
 
         WlSessionLockSurface {
+            color: "transparent"
+
             Lockscreen {
                 anchors.fill: parent
 
