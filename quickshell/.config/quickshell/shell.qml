@@ -4,9 +4,9 @@ import Quickshell.Services.Pam
 import Quickshell.Wayland
 import QtQml
 import QtQuick
-import "lock"
 import qs.components.Bar
 import qs.components.Bar.modules
+import qs.components.Lock
 import qs.components.Wallpaper
 
 ShellRoot {

@@ -70,7 +70,7 @@ when a key is released rather than pressed.
 ## Quickshell reference
 
 - Desktop notifications use `Quickshell.Services.Notifications.NotificationServer`
-  in `quickshell/.config/quickshell/og/components/Bar/modules/Notifications.qml`;
+  in `quickshell/.config/quickshell/components/Bar/modules/Notifications.qml`;
   do not reintroduce SwayNC for notification delivery.
 - Capture `Hyprland.focusedMonitor` when each notification arrives and store its
   screen name. Render per-screen `PanelWindow` variants so existing notifications
@@ -80,8 +80,8 @@ when a key is released rather than pressed.
   item when no icon is available.
 - Notification popups fade after 10 seconds, then call `notification.expire()`.
 - The combined Quickshell entrypoint lives at
-  `quickshell/.config/quickshell/shell.qml`; it owns both the `og` desktop
-  modules and the lock screen in `quickshell/.config/quickshell/lock/`. Keep
+  `quickshell/.config/quickshell/shell.qml`; it owns the desktop modules and
+  the lock screen in `quickshell/.config/quickshell/components/Lock/`. Keep
   `hypridle.conf` pointed at its `lockScreen` IPC handler rather than launching
   a second locker process.
 
