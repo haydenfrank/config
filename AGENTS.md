@@ -18,6 +18,18 @@
 - **github-pr-media:** Use when adding screenshots, diagrams, recordings, or other media to a GitHub pull request or comment.
 - **pr-stack:** Use when creating, splitting, extending, restacking, rebasing, or landing dependent pull request stacks.
 
+## Quickshell and QtQml documentation
+
+- **Quickshell:** Use the official documentation at
+  https://quickshell.org/docs/v0.3.2/ for the usage guide, QML language
+  overview, layout guidance, and Quickshell type definitions. Prefer the
+  repository's existing patterns when the documentation and local code differ.
+- **Qt QML:** Use the Qt 6 module documentation at
+  https://doc.qt.io/qt-6/qtqml-index.html for QML language semantics,
+  JavaScript integration, object and property systems, and QML type behavior.
+- **Qt Quick:** Use https://doc.qt.io/qt-6/qtquick-index.html for visual
+  types, layouts, animations, models, and views used by Quickshell interfaces.
+
 ## Task triggers and change checks
 
 - Treat prompts beginning with `keybinds:` as requests to change a keybinding.
