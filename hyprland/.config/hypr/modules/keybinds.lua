@@ -104,8 +104,8 @@ hl.bind(mainMod .. " + SUPER_L", hl.dsp.exec_cmd("pgrep rofi && pkill rofi || ro
 
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("steam"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("discord"))
-hl.bind(mainMod .. " + K", hl.dsp.exec_cmd("killall discord steam"))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("bluedevil-wizard"))
+hl.bind(mainMod .. " + K", hl.dsp.exec_cmd("killall Discord steam -9"))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("blueman-manager"))
 hl.bind(
 	mainMod .. " + T",
 	hl.dsp.exec_cmd("flatpak run com.spotify.Client --remote-debugging-port=9222 --remote-allow-origins='*'")
