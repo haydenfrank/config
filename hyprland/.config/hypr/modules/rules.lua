@@ -109,8 +109,8 @@ hl.window_rule({
 
 hl.window_rule({ match = { float = 0 }, no_shadow = true })
 
-hl.workspace_rule({ workspace = 1, monitor = "DP-3", default = true })
-hl.workspace_rule({ workspace = 2, monitor = "eDP-1", default = true })
+hl.workspace_rule({ workspace = "1", monitor = "DP-3", default = true })
+hl.workspace_rule({ workspace = "2", monitor = "eDP-1", default = true })
 hl.workspace_rule({ workspace = "special:special", gaps_out = 30 })
 
 hl.layer_rule({ match = { namespace = ".*" }, xray = true })
