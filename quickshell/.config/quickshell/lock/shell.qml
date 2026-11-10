@@ -59,6 +59,15 @@ ShellRoot {
         }
     }
 
+    Image {
+        id: wallpaperCache
+
+        source: root.wallpaperPath
+        asynchronous: false
+        cache: true
+        visible: false
+    }
+
     PamContext {
         id: pam
 
