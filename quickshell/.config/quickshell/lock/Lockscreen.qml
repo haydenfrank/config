@@ -38,7 +38,7 @@ Item {
 
     Text {
         anchors.centerIn: parent
-        anchors.verticalCenterOffset: 200
+        anchors.verticalCenterOffset: -200
 
         text: Qt.formatTime(new Date(), "h:mm")
         color: root.timeColor
@@ -57,7 +57,7 @@ Item {
 
     Text {
         anchors.centerIn: parent
-        anchors.verticalCenterOffset: 300
+        anchors.verticalCenterOffset: -100
 
         text: Qt.formatDate(new Date(), "dddd, MMMM dd")
         color: root.dateColor
@@ -76,7 +76,7 @@ Item {
     Rectangle {
         visible: root.primary
         anchors.centerIn: parent
-        anchors.verticalCenterOffset: -200
+        anchors.verticalCenterOffset: 100
 
         width: 250
         height: 60
@@ -138,7 +138,7 @@ Item {
     Row {
         visible: root.primary
         anchors.centerIn: parent
-        anchors.verticalCenterOffset: -350
+        anchors.verticalCenterOffset: 350
         spacing: 30
 
         ActionButton {
