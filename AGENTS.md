@@ -76,6 +76,10 @@ documentation.
   `AppSearch.guessIcon` only when it resolves to a real icon, and omit the icon
   item when no icon is available.
 - Notification popups fade after 10 seconds, then call `notification.expire()`.
+- The lock screen lives in `quickshell/.config/quickshell/lock/` and uses
+  `WlSessionLock`/`WlSessionLockSurface` with `Quickshell.Services.Pam`; keep
+  `hypridle.conf` pointed at its `lockScreen` IPC handler rather than launching
+  a second locker process.
 
 ## Stack
 

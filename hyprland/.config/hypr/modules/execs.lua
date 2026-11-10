@@ -1,7 +1,7 @@
 hl.on("hyprland.start", function()
 	hl.exec_cmd("sudo scxctl start --sched lavd --args performance")
 	hl.exec_cmd("uwsm app hypridle")
-	hl.exec_cmd("uwsm app hyprlock")
+	hl.exec_cmd("QS_NO_RELOAD_POPUP=1 uwsm app -- qs -c lock")
 	hl.exec_cmd("uwsm app wl-clip-persist --clipboard regular")
 	hl.exec_cmd("uwsm app awww-daemon")
 	hl.exec_cmd("QS_NO_RELOAD_POPUP=1 uwsm app -- qs -c og")
