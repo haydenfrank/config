@@ -100,7 +100,11 @@ hl.bind("Control_R", hl.dsp.exec_cmd("kitty -1 --directory /home/hayden/.dotfile
 hl.bind("ALT + grave", hl.dsp.global("discord:discord-toggle-deafen"), { non_consuming = true })
 
 hl.bind(mainMod .. " + X", hl.dsp.layout("togglesplit"))
-hl.bind(mainMod .. " + SUPER_L", hl.dsp.exec_cmd("pgrep rofi && pkill rofi || rofi -show drun -show-icons"))
+hl.bind(
+	mainMod .. " + SUPER_L",
+	hl.dsp.exec_cmd("pgrep rofi && pkill rofi || rofi -show drun -show-icons"),
+	{ release = true }
+)
 
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("steam"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("discord"))

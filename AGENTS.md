@@ -64,6 +64,9 @@ Use the official Hyprland wiki for configuration syntax and current behavior:
 Prefer the repository's existing Hyprland patterns over examples from older
 documentation.
 
+The Lua keybinding helper uses `{ release = true }` for actions that should run
+when a key is released rather than pressed.
+
 ## Quickshell reference
 
 - Desktop notifications use `Quickshell.Services.Notifications.NotificationServer`
