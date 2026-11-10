@@ -53,7 +53,7 @@ documentation.
 - **Desktop/session:** Hyprland, Hyprlock, Hypridle, systemd user services
 - **Shell and CLI:** Fish, Starship, Zoxide, Tmux, NVM, Eza, FD, Pyroclear
 - **Terminal/editor:** Kitty and Neovim
-- **Desktop UI:** Quickshell, SwayNC, Rofi
+- **Desktop UI:** Quickshell, Rofi
 - **Theming:** Matugen, GTK 3/4, KDE/Kvantum, Spicetify
 - **Utilities:** btop and Fastfetch
 - **Desktop integration:** MIME associations and `.desktop` launchers
@@ -78,7 +78,6 @@ Top-level directories are deployable packages whose contents mirror paths below 
 | `rofi/` | Rofi configuration, colors, and Wi-Fi menu |
 | `spicetify/` | Spotify configuration and themes |
 | `starship/` | Starship prompt configuration |
-| `swaync/` | SwayNC configuration, styling, themes, and icons |
 
 Most package roots are linked into `~/.config`. Kitty uses per-file links under
 `~/.config/kitty`; `kdeglobals`, the Hyprland systemd target, the Neovim desktop
@@ -88,7 +87,7 @@ entry, and local helper scripts are also linked individually.
 
 Matugen is the source of generated colors. Its configuration is at
 `matugen/.config/matugen/config.toml` and writes runtime output to Hyprland,
-Hyprlock, Kitty, GTK, Kvantum, Spicetify, Rofi, SwayNC, Neovim, btop, and both
+Hyprlock, Kitty, GTK, Kvantum, Spicetify, Rofi, Neovim, btop, and both
 the `new` and `og` Quickshell configurations.
 
 Generated color files are ignored by Git. Change the corresponding template in

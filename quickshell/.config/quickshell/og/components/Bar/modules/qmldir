@@ -6,3 +6,4 @@ Battery 1.0 Battery.qml
 BatteryPopup 1.0 BatteryPopup.qml
 ClockPopup 1.0 ClockPopup.qml
 WifiPopup 1.0 WifiPopup.qml
+Notifications 1.0 Notifications.qml
