@@ -25,6 +25,8 @@
   live bindings with `hyprctl binds` when Hyprland is running.
 - Hyprland keybindings live in `hyprland/.config/hypr/modules/keybinds.lua`;
   preserve the existing `hl.bind(...)` and `hl.dsp` style when editing them.
+- The Bluetooth manager shortcut uses `bluedevil-wizard` as the repository's
+  Bluetooth settings entry point.
 - For a keybinding change, identify the existing action rather than duplicating
   it, replace only its key unless the user requests an action change, and verify
   the live binding after reload.
