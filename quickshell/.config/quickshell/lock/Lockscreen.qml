@@ -115,6 +115,7 @@ Item {
             passwordCharacter: "•"
             selectByMouse: false
             focus: true
+            cursorVisible: false
             activeFocusOnPress: true
 
             onAccepted: {
