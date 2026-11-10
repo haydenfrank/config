@@ -69,7 +69,7 @@ for i = 1, 10 do
 	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i, follow = false }))
 end
 
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("qs ipc call lockScreen lock"))
 
 local function zoomfunction(value)
 	local zoomvalue = hl.get_config("cursor:zoom_factor")
