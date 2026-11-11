@@ -15,6 +15,9 @@ Item {
     property string statusText: ""
     property bool statusIsError: false
     property string passwordText: ""
+    readonly property bool wallpaperReady: wallpaper === ""
+        || backgroundImage.status === Image.Ready
+        || backgroundImage.status === Image.Error
 
     signal passwordSubmitted(string password)
     signal passwordEdited(string password)
@@ -25,9 +28,11 @@ Item {
             passwordInput.text = root.passwordText;
     }
 
-    opacity: fadingOut ? 0 : 1
+    opacity: fadingOut ? 0 : wallpaperReady ? 1 : 0
 
     Behavior on opacity {
+        enabled: root.fadingOut
+
         NumberAnimation {
             duration: 250
             easing.type: Easing.InOutCubic
@@ -39,6 +44,8 @@ Item {
         color: "#000000"
 
         Image {
+            id: backgroundImage
+
             anchors.fill: parent
             source: root.wallpaper
             fillMode: Image.PreserveAspectCrop

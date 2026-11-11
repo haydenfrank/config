@@ -99,6 +99,8 @@ when a key is released rather than pressed.
   enough for that prompt, with the fingerprint icon on the left.
 - Locking should display the screen immediately; keep the opacity animation only
   for fading out after successful authentication.
+- Wait for the lock wallpaper image to be ready before displaying each
+  session-lock surface, so its black background is not shown during loading.
 
 ## Stack
 
