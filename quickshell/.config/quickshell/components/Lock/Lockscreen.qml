@@ -15,9 +15,16 @@ Item {
     property color errorColor: "#ffb4ab"
     property string statusText: ""
     property bool statusIsError: false
+    property string passwordText: ""
 
     signal passwordSubmitted(string password)
+    signal passwordEdited(string password)
     signal powerAction(string action)
+
+    onPasswordTextChanged: {
+        if (passwordInput.text !== root.passwordText)
+            passwordInput.text = root.passwordText;
+    }
 
     opacity: loaded && !fadingOut ? 1 : 0
 
@@ -121,10 +128,15 @@ Item {
 
             onAccepted: {
                 root.passwordSubmitted(passwordInput.text);
-                passwordInput.text = "";
+            }
+
+            onTextChanged: {
+                if (root.primary && text !== root.passwordText)
+                    root.passwordEdited(text);
             }
 
             Component.onCompleted: {
+                passwordInput.text = root.passwordText;
                 if (root.primary)
                     Qt.callLater(function () {
                         forceActiveFocus();

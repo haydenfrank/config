@@ -20,6 +20,7 @@ ShellRoot {
     property string colorText: ""
     property string wallpaperPath: ""
     property string lockScreenName: ""
+    property string passwordText: ""
 
     function color(name, fallback) {
         const match = new RegExp("^\\$" + name + "\\s*=\\s*rgba\\(([0-9a-fA-F]{8})\\)", "m").exec(root.colorText);
@@ -47,6 +48,8 @@ ShellRoot {
     function submitPassword(password) {
         if (password === "")
             return;
+
+        root.passwordText = "";
 
         if (pam.responseRequired) {
             pam.respond(password);
@@ -153,6 +156,7 @@ ShellRoot {
                     || lockSurface.screen?.name === root.lockScreenName
                 fadingOut: root.fadingOut
                 wallpaper: root.wallpaperPath
+                passwordText: root.passwordText
                 timeColor: root.color("on_surface", "#dee3e6")
                 dateColor: root.color("on_surface_variant", "#bfc8cc")
                 accentColor: root.color("secondary", "#b3cad4")
@@ -164,6 +168,9 @@ ShellRoot {
 
                 onPasswordSubmitted: function (password) {
                     root.submitPassword(password);
+                }
+                onPasswordEdited: function (password) {
+                    root.passwordText = password;
                 }
                 onPowerAction: function (action) {
                     powerProcess.command = action === "shutdown"

@@ -89,6 +89,8 @@ when a key is released rather than pressed.
 - Render the lock input field on every session-lock surface, but make only the
   surface for the monitor focused when locking interactive; capture that monitor
   before creating the session-lock surfaces.
+- Keep the lock password text shared at the shell root so masked input mirrors
+  across every lock surface; clear it when submitting authentication.
 
 ## Stack
 
