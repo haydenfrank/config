@@ -88,7 +88,6 @@ Item {
     }
 
     Rectangle {
-        visible: root.primary
         anchors.centerIn: parent
         anchors.verticalCenterOffset: 100
 
@@ -114,22 +113,27 @@ Item {
             echoMode: TextInput.Password
             passwordCharacter: "•"
             selectByMouse: false
-            focus: true
+            enabled: root.primary
+            focus: root.primary
             cursorVisible: false
-            activeFocusOnPress: true
+            cursorDelegate: Item {}
+            activeFocusOnPress: root.primary
 
             onAccepted: {
                 root.passwordSubmitted(passwordInput.text);
                 passwordInput.text = "";
             }
 
-            Component.onCompleted: Qt.callLater(function () {
-                forceActiveFocus();
-            })
+            Component.onCompleted: {
+                if (root.primary)
+                    Qt.callLater(function () {
+                        forceActiveFocus();
+                    });
+            }
 
             Timer {
                 interval: 100
-                running: true
+                running: root.primary
                 repeat: false
                 onTriggered: passwordInput.forceActiveFocus()
             }
