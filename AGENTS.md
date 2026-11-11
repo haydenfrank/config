@@ -91,6 +91,9 @@ when a key is released rather than pressed.
   before creating the session-lock surfaces.
 - Keep the lock password text shared at the shell root so masked input mirrors
   across every lock surface; clear it when submitting authentication.
+- Quickshell uses its repository-local `quickshell/.config/quickshell/pam.d/lock`
+  stack: try `pam_fprintd` first, then fall back to `pam_unix`; keep this flow
+  automatic when the session lock becomes secure.
 
 ## Stack
 

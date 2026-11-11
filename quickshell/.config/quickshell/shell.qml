@@ -102,7 +102,8 @@ ShellRoot {
     PamContext {
         id: pam
 
-        config: "system-local-login"
+        config: "lock"
+        configDirectory: Quickshell.shellPath("pam.d")
 
         onPamMessage: {
             if (pam.responseRequired) {
