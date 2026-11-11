@@ -31,7 +31,7 @@ Item {
     opacity: fadingOut ? 0 : wallpaperReady ? 1 : 0
 
     Behavior on opacity {
-        enabled: root.fadingOut
+        enabled: root.wallpaperReady
 
         NumberAnimation {
             duration: 250

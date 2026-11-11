@@ -98,7 +98,8 @@ when a key is released rather than pressed.
   when empty, then shows only masked input while typing; keep the field wide
   enough for that prompt, with the fingerprint icon on the left.
 - Locking should display the screen immediately; keep the opacity animation only
-  for fading out after successful authentication.
+  for transitioning after the wallpaper is ready and fading out after
+  successful authentication.
 - Wait for the lock wallpaper image to be ready before displaying each
   session-lock surface, so its black background is not shown during loading.
 
