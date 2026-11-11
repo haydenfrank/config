@@ -158,6 +158,9 @@ GTK portal dark-mode behavior follows `gtk-application-prefer-dark-theme` in bot
 GTK settings files; keep it enabled when the configured GTK theme is dark.
 Qt portal helpers inherit theme variables from the systemd user environment, so
 Hyprland startup must update systemd activation environment as well as D-Bus.
+Recent xdg-desktop-portal-hyprland versions use Hyprtoolkit for the screen-share
+picker; keep its Matugen-generated `hyprtoolkit.conf` template in sync with the
+desktop palette.
 
 ## Reload commands
 

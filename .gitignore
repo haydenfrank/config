@@ -1,5 +1,6 @@
 hyprland/.config/hypr/colors.conf
 hyprland/.config/hypr/colors.lua
+hyprland/.config/hypr/hyprtoolkit.conf
 kitty/.config/kitty/current-theme.conf
 kitty/.config/kitty/themes/Matugen.conf
 neovim/.config/nvim/colors.json
