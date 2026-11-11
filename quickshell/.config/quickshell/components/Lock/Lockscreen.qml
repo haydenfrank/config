@@ -124,8 +124,6 @@ Item {
             id: passwordInput
 
             anchors.fill: parent
-            anchors.leftMargin: 54
-            anchors.rightMargin: 18
 
             color: root.timeColor
             font.family: "SF Pro"
@@ -154,7 +152,7 @@ Item {
                 passwordInput.text = root.passwordText;
                 if (root.primary)
                     Qt.callLater(function () {
-                        forceActiveFocus();
+                        passwordInput.forceActiveFocus();
                     });
             }
 
@@ -168,8 +166,6 @@ Item {
 
         Text {
             anchors.fill: parent
-            anchors.leftMargin: 54
-            anchors.rightMargin: 18
             visible: passwordInput.text === ""
             text: "Use password or biometric authentication"
             color: root.dateColor
@@ -183,7 +179,6 @@ Item {
     }
 
     Row {
-        visible: root.primary
         anchors.centerIn: parent
         anchors.verticalCenterOffset: 350
         spacing: 30
