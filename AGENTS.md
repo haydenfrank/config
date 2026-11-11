@@ -154,6 +154,8 @@ the `new` and `og` Quickshell configurations.
 
 Generated color files are ignored by Git. Change the corresponding template in
 `matugen/.config/matugen/templates/` rather than hand-editing generated output.
+GTK portal dark-mode behavior follows `gtk-application-prefer-dark-theme` in both
+GTK settings files; keep it enabled when the configured GTK theme is dark.
 
 ## Reload commands
 
