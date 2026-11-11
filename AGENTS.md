@@ -98,9 +98,9 @@ when a key is released rather than pressed.
 - The lock password field displays `Use password or biometric authentication`
   when empty, then shows only masked input while typing; keep the field wide
   enough for that prompt, with the fingerprint icon on the left.
-- Keep lock input text centered across the full field despite the fingerprint
-  icon, and render power controls on every lock surface while keeping only the
-  focused surface's input interactive.
+- Keep the lock input centered as its own field with the fingerprint icon
+  separate to its left, and render power controls on every lock surface while
+  keeping only the focused surface's input interactive.
 - Locking should display the screen immediately; keep the opacity animation only
   for transitioning after the wallpaper is ready and fading out after
   successful authentication.

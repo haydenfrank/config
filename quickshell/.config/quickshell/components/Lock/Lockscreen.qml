@@ -99,6 +99,8 @@ Item {
     }
 
     Rectangle {
+        id: passwordField
+
         anchors.centerIn: parent
         anchors.verticalCenterOffset: 100
 
@@ -108,17 +110,6 @@ Item {
         color: root.fieldColor
         border.width: 2
         border.color: root.borderColor
-
-        Text {
-            anchors.left: parent.left
-            anchors.leftMargin: 18
-            anchors.verticalCenter: parent.verticalCenter
-
-            text: "󰈷"
-            color: root.accentColor
-            font.family: "JetBrainsMono Nerd Font Propo"
-            font.pixelSize: 24
-        }
 
         TextInput {
             id: passwordInput
@@ -176,6 +167,17 @@ Item {
             elide: Text.ElideRight
         }
 
+    }
+
+    Text {
+        anchors.right: passwordField.left
+        anchors.rightMargin: 12
+        anchors.verticalCenter: passwordField.verticalCenter
+
+        text: "󰈷"
+        color: root.accentColor
+        font.family: "JetBrainsMono Nerd Font Propo"
+        font.pixelSize: 24
     }
 
     Row {
