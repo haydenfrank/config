@@ -5,7 +5,6 @@ Item {
 
     property bool primary: false
     property bool fadingOut: false
-    property bool loaded: false
     property string wallpaper: ""
     property color timeColor: "#dee3e6"
     property color dateColor: "#bfc8cc"
@@ -26,7 +25,7 @@ Item {
             passwordInput.text = root.passwordText;
     }
 
-    opacity: loaded && !fadingOut ? 1 : 0
+    opacity: fadingOut ? 0 : 1
 
     Behavior on opacity {
         NumberAnimation {
@@ -34,8 +33,6 @@ Item {
             easing.type: Easing.InOutCubic
         }
     }
-
-    Component.onCompleted: loaded = true
 
     Rectangle {
         anchors.fill: parent

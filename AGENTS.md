@@ -97,6 +97,8 @@ when a key is released rather than pressed.
 - The lock password field displays `Use password or biometric authentication`
   when empty, then shows only masked input while typing; keep the field wide
   enough for that prompt, with the fingerprint icon on the left.
+- Locking should display the screen immediately; keep the opacity animation only
+  for fading out after successful authentication.
 
 ## Stack
 
