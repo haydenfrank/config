@@ -156,6 +156,8 @@ Generated color files are ignored by Git. Change the corresponding template in
 `matugen/.config/matugen/templates/` rather than hand-editing generated output.
 GTK portal dark-mode behavior follows `gtk-application-prefer-dark-theme` in both
 GTK settings files; keep it enabled when the configured GTK theme is dark.
+Qt portal helpers inherit theme variables from the systemd user environment, so
+Hyprland startup must update systemd activation environment as well as D-Bus.
 
 ## Reload commands
 
