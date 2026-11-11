@@ -208,6 +208,7 @@ ShellRoot {
                 fadingOut: root.fadingOut
                 wallpaper: root.wallpaperPath
                 passwordText: root.passwordText
+                fingerprintScanning: fingerprintPam.active
                 timeColor: root.color("on_surface", "#dee3e6")
                 dateColor: root.color("on_surface_variant", "#bfc8cc")
                 accentColor: root.color("secondary", "#b3cad4")

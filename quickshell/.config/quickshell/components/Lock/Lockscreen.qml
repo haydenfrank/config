@@ -15,6 +15,8 @@ Item {
     property string statusText: ""
     property bool statusIsError: false
     property string passwordText: ""
+    property bool fingerprintScanning: false
+    property bool fingerprintBlinkOn: true
     readonly property bool wallpaperReady: wallpaper === ""
         || backgroundImage.status === Image.Ready
         || backgroundImage.status === Image.Error
@@ -26,6 +28,11 @@ Item {
     onPasswordTextChanged: {
         if (passwordInput.text !== root.passwordText)
             passwordInput.text = root.passwordText;
+    }
+
+    onFingerprintScanningChanged: {
+        if (!root.fingerprintScanning)
+            root.fingerprintBlinkOn = true;
     }
 
     opacity: fadingOut ? 0 : wallpaperReady ? 1 : 0
@@ -98,93 +105,112 @@ Item {
         }
     }
 
-    Row {
+    Rectangle {
+        id: passwordField
+
         anchors.centerIn: parent
         anchors.verticalCenterOffset: 100
-        spacing: 18
 
-        Rectangle {
-            width: 60
-            height: 60
-            radius: 18
-            color: root.fieldColor
-            border.width: 2
-            border.color: root.borderColor
+        width: 360
+        height: 60
+        radius: 18
+        color: root.fieldColor
+        border.width: 2
+        border.color: root.borderColor
 
-            Text {
-                anchors.centerIn: parent
+        TextInput {
+            id: passwordInput
 
-                text: "󰈷"
-                color: root.accentColor
-                font.family: "JetBrainsMono Nerd Font Propo"
-                font.pixelSize: 24
+            anchors.fill: parent
+
+            color: root.timeColor
+            font.family: "SF Pro"
+            font.pixelSize: 18
+            horizontalAlignment: TextInput.AlignHCenter
+            verticalAlignment: TextInput.AlignVCenter
+            echoMode: TextInput.Password
+            passwordCharacter: "•"
+            selectByMouse: false
+            enabled: root.primary
+            focus: root.primary
+            cursorVisible: false
+            cursorDelegate: Item {}
+            activeFocusOnPress: root.primary
+
+            onAccepted: {
+                root.passwordSubmitted(passwordInput.text);
+            }
+
+            onTextChanged: {
+                if (root.primary && text !== root.passwordText)
+                    root.passwordEdited(text);
+            }
+
+            Component.onCompleted: {
+                passwordInput.text = root.passwordText;
+                if (root.primary)
+                    Qt.callLater(function () {
+                        passwordInput.forceActiveFocus();
+                    });
+            }
+
+            Timer {
+                interval: 100
+                running: root.primary
+                repeat: false
+                onTriggered: passwordInput.forceActiveFocus()
             }
         }
 
-        Rectangle {
-            id: passwordField
+        Text {
+            anchors.fill: parent
+            visible: passwordInput.text === ""
+            text: "Use password or biometric authentication"
+            color: root.dateColor
+            font.family: "SF Pro"
+            font.pixelSize: 14
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            elide: Text.ElideRight
+        }
+    }
 
-            width: 360
-            height: 60
-            radius: 18
-            color: root.fieldColor
-            border.width: 2
-            border.color: root.borderColor
+    Rectangle {
+        id: fingerprintBox
 
-            TextInput {
-                id: passwordInput
+        anchors.right: passwordField.left
+        anchors.rightMargin: 18
+        anchors.verticalCenter: passwordField.verticalCenter
 
-                anchors.fill: parent
+        width: 60
+        height: 60
+        radius: width / 2
+        color: root.fieldColor
+        border.width: 2
+        border.color: root.borderColor
 
-                color: root.timeColor
-                font.family: "SF Pro"
-                font.pixelSize: 18
-                horizontalAlignment: TextInput.AlignHCenter
-                verticalAlignment: TextInput.AlignVCenter
-                echoMode: TextInput.Password
-                passwordCharacter: "•"
-                selectByMouse: false
-                enabled: root.primary
-                focus: root.primary
-                cursorVisible: false
-                cursorDelegate: Item {}
-                activeFocusOnPress: root.primary
+        Text {
+            id: fingerprintIcon
 
-                onAccepted: {
-                    root.passwordSubmitted(passwordInput.text);
-                }
+            anchors.centerIn: parent
 
-                onTextChanged: {
-                    if (root.primary && text !== root.passwordText)
-                        root.passwordEdited(text);
-                }
+            text: "󰈷"
+            color: root.accentColor
+            font.family: "JetBrainsMono Nerd Font Propo"
+            font.pixelSize: 24
+            opacity: root.fingerprintScanning && !root.fingerprintBlinkOn ? 0.3 : 1
 
-                Component.onCompleted: {
-                    passwordInput.text = root.passwordText;
-                    if (root.primary)
-                        Qt.callLater(function () {
-                            passwordInput.forceActiveFocus();
-                        });
-                }
-
-                Timer {
-                    interval: 100
-                    running: root.primary
-                    repeat: false
-                    onTriggered: passwordInput.forceActiveFocus()
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: 250
                 }
             }
 
-            Text {
-                anchors.fill: parent
-                visible: passwordInput.text === ""
-                text: "Use password or biometric authentication"
-                color: root.dateColor
-                font.family: "SF Pro"
-                font.pixelSize: 14
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                elide: Text.ElideRight
+            Timer {
+                interval: 500
+                running: root.fingerprintScanning
+                repeat: true
+                onTriggered: root.fingerprintBlinkOn = !root.fingerprintBlinkOn
             }
         }
     }
