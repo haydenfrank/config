@@ -5,6 +5,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("uwsm app awww-daemon")
 	hl.exec_cmd("QS_NO_RELOAD_POPUP=1 uwsm app -- qs")
 	hl.exec_cmd("dbus-update-activation-environment --all")
+	hl.exec_cmd("for i in 1 2 3 4 5; do qs ipc call lockScreen lock && exit 0; sleep 1; done")
 end)
 
 hl.on("hyprland.shutdown", function()

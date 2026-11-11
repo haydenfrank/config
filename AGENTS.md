@@ -84,6 +84,8 @@ when a key is released rather than pressed.
   the lock screen in `quickshell/.config/quickshell/components/Lock/`. Keep
   `hypridle.conf` pointed at its `lockScreen` IPC handler rather than launching
   a second locker process.
+- Hyprland starts Quickshell asynchronously; startup lock requests must retry
+  `qs ipc call lockScreen lock` until the `lockScreen` IPC handler is ready.
 
 ## Stack
 
