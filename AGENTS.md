@@ -86,6 +86,8 @@ when a key is released rather than pressed.
   a second locker process.
 - Hyprland starts Quickshell asynchronously; startup lock requests must retry
   `qs ipc call lockScreen lock` until the `lockScreen` IPC handler is ready.
+- The lock input field is rendered only on the monitor focused when the lock was
+  requested; capture that monitor before creating the session-lock surfaces.
 
 ## Stack
 

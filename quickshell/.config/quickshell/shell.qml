@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Io
+import Quickshell.Hyprland
 import Quickshell.Services.Pam
 import Quickshell.Wayland
 import QtQml
@@ -18,6 +19,7 @@ ShellRoot {
     property bool statusIsError: false
     property string colorText: ""
     property string wallpaperPath: ""
+    property string lockScreenName: ""
 
     function color(name, fallback) {
         const match = new RegExp("^\\$" + name + "\\s*=\\s*rgba\\(([0-9a-fA-F]{8})\\)", "m").exec(root.colorText);
@@ -50,6 +52,17 @@ ShellRoot {
             pam.respond(password);
         } else if (!pam.active) {
             beginAuthentication();
+        }
+    }
+
+    function requestLock() {
+        if (!root.lockRequested) {
+            const focusedMonitor = Hyprland.focusedMonitor;
+            root.lockScreenName = focusedMonitor?.name
+                ?? Quickshell.screens[0]?.name
+                ?? "";
+            root.lockRequested = true;
+            root.beginAuthentication();
         }
     }
 
@@ -129,13 +142,15 @@ ShellRoot {
         }
 
         WlSessionLockSurface {
+            id: lockSurface
+
             color: "transparent"
 
             Lockscreen {
                 anchors.fill: parent
 
                 primary: Quickshell.screens.length === 1
-                    || parent.screen.name === Quickshell.screens[0].name
+                    || lockSurface.screen?.name === root.lockScreenName
                 fadingOut: root.fadingOut
                 wallpaper: root.wallpaperPath
                 timeColor: root.color("on_surface", "#dee3e6")
@@ -182,10 +197,7 @@ ShellRoot {
         target: "lockScreen"
 
         function lock() {
-            if (!root.lockRequested) {
-                root.lockRequested = true;
-                root.beginAuthentication();
-            }
+            root.requestLock();
         }
     }
 
