@@ -84,8 +84,9 @@ when a key is released rather than pressed.
   the lock screen in `quickshell/.config/quickshell/components/Lock/`. Keep
   `hypridle.conf` pointed at its `lockScreen` IPC handler rather than launching
   a second locker process.
-- Hyprland starts Quickshell asynchronously; startup lock requests must retry
-  `qs ipc call lockScreen lock` until the `lockScreen` IPC handler is ready.
+- Hyprland starts Quickshell asynchronously; `hyprland/.config/hypr/modules/execs.lua`
+  retries `qs ipc call lockScreen lock` until the `lockScreen` IPC handler is ready,
+  so the shell starts locked.
 - Render the lock input field on every session-lock surface, but make only the
   surface for the monitor focused when locking interactive; capture that monitor
   before creating the session-lock surfaces.
