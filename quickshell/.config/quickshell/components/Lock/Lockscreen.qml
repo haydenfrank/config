@@ -151,19 +151,6 @@ Item {
             }
         }
 
-        Text {
-            anchors.fill: parent
-            anchors.leftMargin: 18
-            anchors.rightMargin: 18
-            visible: passwordInput.text === ""
-            text: root.statusText
-            color: root.statusIsError ? root.errorColor : root.dateColor
-            font.family: "SF Pro"
-            font.pixelSize: 14
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            elide: Text.ElideRight
-        }
     }
 
     Row {

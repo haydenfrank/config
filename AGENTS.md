@@ -94,6 +94,8 @@ when a key is released rather than pressed.
 - Quickshell uses separate repository-local PAM sessions under
   `quickshell/.config/quickshell/pam.d/`: `fingerprint` runs `pam_fprintd`, and
   `password` runs `pam_unix`, allowing either method to unlock independently.
+- Keep the lock password field visually empty; do not render placeholder or
+  status text inside the input box.
 
 ## Stack
 
