@@ -98,86 +98,95 @@ Item {
         }
     }
 
-    Rectangle {
-        id: passwordField
-
+    Row {
         anchors.centerIn: parent
         anchors.verticalCenterOffset: 100
+        spacing: 18
 
-        width: 360
-        height: 60
-        radius: 18
-        color: root.fieldColor
-        border.width: 2
-        border.color: root.borderColor
+        Rectangle {
+            width: 60
+            height: 60
+            radius: 18
+            color: root.fieldColor
+            border.width: 2
+            border.color: root.borderColor
 
-        TextInput {
-            id: passwordInput
+            Text {
+                anchors.centerIn: parent
 
-            anchors.fill: parent
-
-            color: root.timeColor
-            font.family: "SF Pro"
-            font.pixelSize: 18
-            horizontalAlignment: TextInput.AlignHCenter
-            verticalAlignment: TextInput.AlignVCenter
-            echoMode: TextInput.Password
-            passwordCharacter: "•"
-            selectByMouse: false
-            enabled: root.primary
-            focus: root.primary
-            cursorVisible: false
-            cursorDelegate: Item {}
-            activeFocusOnPress: root.primary
-
-            onAccepted: {
-                root.passwordSubmitted(passwordInput.text);
-            }
-
-            onTextChanged: {
-                if (root.primary && text !== root.passwordText)
-                    root.passwordEdited(text);
-            }
-
-            Component.onCompleted: {
-                passwordInput.text = root.passwordText;
-                if (root.primary)
-                    Qt.callLater(function () {
-                        passwordInput.forceActiveFocus();
-                    });
-            }
-
-            Timer {
-                interval: 100
-                running: root.primary
-                repeat: false
-                onTriggered: passwordInput.forceActiveFocus()
+                text: "󰈷"
+                color: root.accentColor
+                font.family: "JetBrainsMono Nerd Font Propo"
+                font.pixelSize: 24
             }
         }
 
-        Text {
-            anchors.fill: parent
-            visible: passwordInput.text === ""
-            text: "Use password or biometric authentication"
-            color: root.dateColor
-            font.family: "SF Pro"
-            font.pixelSize: 14
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            elide: Text.ElideRight
+        Rectangle {
+            id: passwordField
+
+            width: 360
+            height: 60
+            radius: 18
+            color: root.fieldColor
+            border.width: 2
+            border.color: root.borderColor
+
+            TextInput {
+                id: passwordInput
+
+                anchors.fill: parent
+
+                color: root.timeColor
+                font.family: "SF Pro"
+                font.pixelSize: 18
+                horizontalAlignment: TextInput.AlignHCenter
+                verticalAlignment: TextInput.AlignVCenter
+                echoMode: TextInput.Password
+                passwordCharacter: "•"
+                selectByMouse: false
+                enabled: root.primary
+                focus: root.primary
+                cursorVisible: false
+                cursorDelegate: Item {}
+                activeFocusOnPress: root.primary
+
+                onAccepted: {
+                    root.passwordSubmitted(passwordInput.text);
+                }
+
+                onTextChanged: {
+                    if (root.primary && text !== root.passwordText)
+                        root.passwordEdited(text);
+                }
+
+                Component.onCompleted: {
+                    passwordInput.text = root.passwordText;
+                    if (root.primary)
+                        Qt.callLater(function () {
+                            passwordInput.forceActiveFocus();
+                        });
+                }
+
+                Timer {
+                    interval: 100
+                    running: root.primary
+                    repeat: false
+                    onTriggered: passwordInput.forceActiveFocus()
+                }
+            }
+
+            Text {
+                anchors.fill: parent
+                visible: passwordInput.text === ""
+                text: "Use password or biometric authentication"
+                color: root.dateColor
+                font.family: "SF Pro"
+                font.pixelSize: 14
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                elide: Text.ElideRight
+            }
         }
-
-    }
-
-    Text {
-        anchors.right: passwordField.left
-        anchors.rightMargin: 12
-        anchors.verticalCenter: passwordField.verticalCenter
-
-        text: "󰈷"
-        color: root.accentColor
-        font.family: "JetBrainsMono Nerd Font Propo"
-        font.pixelSize: 24
     }
 
     Row {
