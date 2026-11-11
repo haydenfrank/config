@@ -107,6 +107,8 @@ when a key is released rather than pressed.
   successful authentication.
 - Wait for the lock wallpaper image to be ready before displaying each
   session-lock surface, so its black background is not shown during loading.
+- The lock wallpaper uses `QtQuick.Effects.MultiEffect` with a hidden source
+  item so the rendered background stays blurred without duplicating a sharp image.
 
 ## Stack
 

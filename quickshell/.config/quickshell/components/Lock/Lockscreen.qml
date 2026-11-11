@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Effects
 
 Item {
     id: root
@@ -50,15 +51,30 @@ Item {
         anchors.fill: parent
         color: "#000000"
 
-        Image {
-            id: backgroundImage
+        Item {
+            id: backgroundSource
 
             anchors.fill: parent
-            source: root.wallpaper
-            fillMode: Image.PreserveAspectCrop
-            asynchronous: true
-            cache: true
-            sourceSize.width: 2560
+            visible: false
+
+            Image {
+                id: backgroundImage
+
+                anchors.fill: parent
+                source: root.wallpaper
+                fillMode: Image.PreserveAspectCrop
+                asynchronous: true
+                cache: true
+                sourceSize.width: 2560
+            }
+        }
+
+        MultiEffect {
+            anchors.fill: backgroundSource
+            source: backgroundSource
+            blurEnabled: true
+            blur: 0.8
+            blurMax: 32
             opacity: 0.5
         }
 
