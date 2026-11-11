@@ -21,6 +21,7 @@ ShellRoot {
     property string wallpaperPath: ""
     property string lockScreenName: ""
     property string passwordText: ""
+    property string pendingPassword: ""
 
     function color(name, fallback) {
         const match = new RegExp("^\\$" + name + "\\s*=\\s*rgba\\(([0-9a-fA-F]{8})\\)", "m").exec(root.colorText);
@@ -36,12 +37,15 @@ ShellRoot {
         root.statusText = "Input Password or Scan Fingerprint...";
         root.statusIsError = false;
 
-        if (pam.active)
-            pam.abort();
+        if (fingerprintPam.active)
+            fingerprintPam.abort();
+        if (passwordPam.active)
+            passwordPam.abort();
+        root.pendingPassword = "";
 
         Qt.callLater(function () {
-            if (root.lockRequested && !pam.active)
-                pam.start();
+            if (root.lockRequested && sessionLock.secure && !fingerprintPam.active && !passwordPam.active)
+                fingerprintPam.start();
         });
     }
 
@@ -50,11 +54,16 @@ ShellRoot {
             return;
 
         root.passwordText = "";
+        root.pendingPassword = password;
 
-        if (pam.responseRequired) {
-            pam.respond(password);
-        } else if (!pam.active) {
-            beginAuthentication();
+        if (fingerprintPam.active)
+            fingerprintPam.abort();
+
+        if (passwordPam.responseRequired) {
+            passwordPam.respond(password);
+            root.pendingPassword = "";
+        } else if (!passwordPam.active) {
+            passwordPam.start();
         }
     }
 
@@ -100,20 +109,59 @@ ShellRoot {
     }
 
     PamContext {
-        id: pam
+        id: fingerprintPam
 
-        config: "lock"
+        config: "fingerprint"
         configDirectory: Quickshell.shellPath("pam.d")
 
         onPamMessage: {
-            if (pam.responseRequired) {
-                root.statusText = pam.responseVisible
-                    ? "Input Password or Scan Fingerprint..."
-                    : pam.message;
-                root.statusIsError = pam.messageIsError;
-            } else if (pam.message !== "") {
-                root.statusText = pam.message;
-                root.statusIsError = pam.messageIsError;
+            if (fingerprintPam.message !== "") {
+                root.statusText = fingerprintPam.message;
+                root.statusIsError = fingerprintPam.messageIsError;
+            }
+        }
+
+        onCompleted: function (result) {
+            if (result === PamResult.Success) {
+                root.fadingOut = true;
+                unlockTimer.start();
+            } else {
+                root.statusText = result === PamResult.MaxTries
+                    ? "Fingerprint attempts exhausted; enter password"
+                    : "Scan fingerprint or enter password";
+                root.statusIsError = true;
+                if (root.lockRequested)
+                    fingerprintRetryTimer.start();
+            }
+        }
+
+        onError: function (error) {
+            root.statusText = "Fingerprint unavailable; enter password";
+            root.statusIsError = true;
+        }
+    }
+
+    PamContext {
+        id: passwordPam
+
+        config: "password"
+        configDirectory: Quickshell.shellPath("pam.d")
+
+        onPamMessage: {
+            if (passwordPam.responseRequired) {
+                if (root.pendingPassword !== "") {
+                    const password = root.pendingPassword;
+                    root.pendingPassword = "";
+                    passwordPam.respond(password);
+                } else {
+                    root.statusText = passwordPam.responseVisible
+                        ? "Input Password or Scan Fingerprint..."
+                        : passwordPam.message;
+                    root.statusIsError = passwordPam.messageIsError;
+                }
+            } else if (passwordPam.message !== "") {
+                root.statusText = passwordPam.message;
+                root.statusIsError = passwordPam.messageIsError;
             }
         }
 
@@ -126,6 +174,8 @@ ShellRoot {
                     ? "Authentication temporarily unavailable"
                     : "Authentication failed";
                 root.statusIsError = true;
+                if (root.lockRequested)
+                    fingerprintRetryTimer.start();
             }
         }
 
@@ -190,6 +240,18 @@ ShellRoot {
     }
 
     Timer {
+        id: fingerprintRetryTimer
+
+        interval: 250
+        repeat: false
+
+        onTriggered: {
+            if (root.lockRequested && !fingerprintPam.active && !passwordPam.active)
+                fingerprintPam.start();
+        }
+    }
+
+    Timer {
         id: unlockTimer
 
         interval: 250
@@ -198,6 +260,8 @@ ShellRoot {
         onTriggered: {
             root.lockRequested = false;
             root.fadingOut = false;
+            root.passwordText = "";
+            root.pendingPassword = "";
         }
     }
 
