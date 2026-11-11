@@ -105,11 +105,22 @@ Item {
         border.width: 2
         border.color: root.borderColor
 
+        Text {
+            anchors.left: parent.left
+            anchors.leftMargin: 18
+            anchors.verticalCenter: parent.verticalCenter
+
+            text: "󰈷"
+            color: root.accentColor
+            font.family: "JetBrainsMono Nerd Font Propo"
+            font.pixelSize: 24
+        }
+
         TextInput {
             id: passwordInput
 
             anchors.fill: parent
-            anchors.leftMargin: 18
+            anchors.leftMargin: 54
             anchors.rightMargin: 18
 
             color: root.timeColor
@@ -153,7 +164,7 @@ Item {
 
         Text {
             anchors.fill: parent
-            anchors.leftMargin: 18
+            anchors.leftMargin: 54
             anchors.rightMargin: 18
             visible: passwordInput.text === ""
             text: "Use password or biometric authentication"
