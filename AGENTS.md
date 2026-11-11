@@ -95,7 +95,8 @@ when a key is released rather than pressed.
   `quickshell/.config/quickshell/pam.d/`: `fingerprint` runs `pam_fprintd`, and
   `password` runs `pam_unix`, allowing either method to unlock independently.
 - The lock password field displays `Use password or biometric authentication`
-  when empty, then shows only masked input while typing.
+  when empty, then shows only masked input while typing; keep the field wide
+  enough for that prompt.
 
 ## Stack
 

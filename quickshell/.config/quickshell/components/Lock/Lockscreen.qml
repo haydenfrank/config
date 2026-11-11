@@ -98,7 +98,7 @@ Item {
         anchors.centerIn: parent
         anchors.verticalCenterOffset: 100
 
-        width: 250
+        width: 360
         height: 60
         radius: 18
         color: root.fieldColor
