@@ -1,18 +1,17 @@
 import QtQuick
 import QtQuick.Effects
+import qs.config
 
 Item {
     id: root
 
+    Colors {
+        id: colors
+    }
+
     property bool primary: false
     property bool fadingOut: false
     property string wallpaper: ""
-    property color timeColor: "#dee3e6"
-    property color dateColor: "#bfc8cc"
-    property color accentColor: "#b3cad4"
-    property color borderColor: "#40484b"
-    property color fieldColor: "#292f31"
-    property color errorColor: "#ffb4ab"
     property string statusText: ""
     property bool statusIsError: false
     property string passwordText: ""
@@ -89,7 +88,7 @@ Item {
         anchors.verticalCenterOffset: -200
 
         text: Qt.formatTime(new Date(), "h:mm")
-        color: root.timeColor
+        color: colors.on_surface
         font.family: "SF Pro"
         font.pixelSize: 95
         font.weight: Font.Black
@@ -108,7 +107,7 @@ Item {
         anchors.verticalCenterOffset: -100
 
         text: Qt.formatDate(new Date(), "dddd, MMMM dd")
-        color: root.dateColor
+        color: colors.on_surface_variant
         font.family: "SF Pro"
         font.pixelSize: 22
 
@@ -130,16 +129,16 @@ Item {
         width: 360
         height: 60
         radius: 18
-        color: root.fieldColor
+        color: colors.surface_container_high
         border.width: 2
-        border.color: root.borderColor
+        border.color: colors.outline_variant
 
         TextInput {
             id: passwordInput
 
             anchors.fill: parent
 
-            color: root.timeColor
+            color: colors.on_surface
             font.family: "SF Pro"
             font.pixelSize: 18
             horizontalAlignment: TextInput.AlignHCenter
@@ -182,7 +181,7 @@ Item {
             anchors.fill: parent
             visible: passwordInput.text === ""
             text: "Use password or biometric authentication"
-            color: root.dateColor
+            color: colors.on_surface_variant
             font.family: "SF Pro"
             font.pixelSize: 14
             horizontalAlignment: Text.AlignHCenter
@@ -201,9 +200,9 @@ Item {
         width: 60
         height: 60
         radius: width / 2
-        color: root.fieldColor
+        color: colors.surface_container_high
         border.width: 2
-        border.color: root.borderColor
+        border.color: colors.outline_variant
 
         Text {
             id: fingerprintIcon
@@ -211,7 +210,7 @@ Item {
             anchors.centerIn: parent
 
             text: "󰈷"
-            color: root.accentColor
+            color: colors.secondary
             font.family: "JetBrainsMono Nerd Font Propo"
             font.pixelSize: 24
             opacity: root.fingerprintScanning && !root.fingerprintBlinkOn ? 0.3 : 1
@@ -238,21 +237,21 @@ Item {
 
         ActionButton {
             icon: ""
-            color: root.accentColor
+            color: colors.secondary
             action: "shutdown"
             onTriggered: root.powerAction(action)
         }
 
         ActionButton {
             icon: ""
-            color: root.accentColor
+            color: colors.secondary
             action: "reboot"
             onTriggered: root.powerAction(action)
         }
 
         ActionButton {
             icon: "󰤄"
-            color: root.accentColor
+            color: colors.secondary
             action: "suspend"
             onTriggered: root.powerAction(action)
         }

@@ -109,6 +109,9 @@ when a key is released rather than pressed.
   session-lock surface, so its black background is not shown during loading.
 - The lock wallpaper uses `QtQuick.Effects.MultiEffect` with a hidden source
   item so the rendered background stays blurred without duplicating a sharp image.
+- `components/Lock/Lockscreen.qml` instantiates `qs.config.Colors` directly for
+  lockscreen colors; keep color-role bindings there instead of passing individual
+  colors through `shell.qml`.
 
 ## Stack
 
