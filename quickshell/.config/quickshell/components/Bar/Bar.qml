@@ -5,10 +5,21 @@ import Quickshell.Io
 import qs.config
 import qs.components.Bar.modules
 import qs.components.Services
+import qs.components.Wallpaper
 
 Scope {
+    property bool wallpaperOpen: false
+
     Colors {
         id: colors
+    }
+
+    IpcHandler {
+        target: "wallpaper"
+
+        function toggle() {
+            wallpaperOpen = !wallpaperOpen;
+        }
     }
 
     Variants {
@@ -35,17 +46,27 @@ Scope {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottom: parent.bottom
                 color: colors.surface_container
-                implicitWidth: barContainerRow.implicitWidth + 36
-                implicitHeight: 36
+                implicitWidth: wallpaperOpen ? wallpaperSelector.implicitWidth + 24 : barContainerRow.implicitWidth + 36
+                implicitHeight: wallpaperOpen ? wallpaperSelector.implicitHeight + 12 : 36
                 radius: 18
                 border.color: colors.outline_variant
                 border.width: 2
+
+                Wallpaper {
+                    id: wallpaperSelector
+
+                    anchors.centerIn: parent
+                    opened: wallpaperOpen
+
+                    onClosed: wallpaperOpen = false;
+                }
 
                 RowLayout {
                     id: barContainerRow
 
                     anchors.centerIn: parent
                     spacing: 18
+                    visible: !wallpaperSelector.opened
 
                     Clock {
                         id: clockModule
@@ -53,10 +74,6 @@ Scope {
 
                     Workspaces {
                         id: workspacesModule
-                    }
-
-                    Wallpaper {
-                        id: wallpaperModule
                     }
 
                     Wifi {

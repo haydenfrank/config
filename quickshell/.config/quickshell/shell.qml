@@ -81,7 +81,6 @@ ShellRoot {
     Scope {
         Bar {}
         Notifications {}
-        Wallpaper {}
     }
 
     FileView {

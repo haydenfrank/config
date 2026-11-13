@@ -3,21 +3,16 @@ import Quickshell
 import Quickshell.Io
 import qs.config
 
-PanelWindow {
+Item {
     id: wallpaperWindow
 
     property bool opened: false
 
-    visible: opened
-    focusable: true
-    color: "transparent"
+    signal closed
 
-    anchors {
-        top: true
-        bottom: true
-        left: true
-        right: true
-    }
+    implicitWidth: opened ? 800 : 0
+    implicitHeight: opened ? 600 : 0
+    visible: opened
 
     Colors {
         id: colors
@@ -30,14 +25,6 @@ PanelWindow {
     Process {
         id: matugenProcess
     }
-    IpcHandler {
-        target: "wallpaper"
-
-        function toggle() {
-            wallpaperWindow.opened = !wallpaperWindow.opened;
-        }
-    }
-
     function setWallpaper(path) {
         if (!path)
             return;
@@ -49,7 +36,7 @@ PanelWindow {
 
         matugenProcess.running = true;
 
-        wallpaperWindow.opened = false;
+        wallpaperWindow.closed();
     }
 
     // Transparent fullscreen click-catcher.
@@ -59,16 +46,11 @@ PanelWindow {
         anchors.fill: parent
 
         onClicked: {
-            wallpaperWindow.opened = false;
+            wallpaperWindow.closed();
         }
 
         Rectangle {
-            id: container
-
-            anchors.centerIn: parent
-
-            width: 800
-            height: 600
+            anchors.fill: parent
 
             color: colors.surface_container
             radius: 20
