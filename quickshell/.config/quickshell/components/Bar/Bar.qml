@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
+import Quickshell.Wayland
 import qs.config
 import qs.components.Bar.modules
 import qs.components.Services
@@ -33,6 +34,7 @@ Scope {
             screen: modelData
             color: "transparent"
             implicitHeight: barContainer.implicitHeight + 6
+            WlrLayershell.exclusiveZone: 42
 
             anchors {
                 top: true
