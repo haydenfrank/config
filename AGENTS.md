@@ -102,6 +102,8 @@ when a key is released rather than pressed.
   box beside it as a circle, and blink the icon while fingerprint PAM is active.
   Render power controls on every lock surface while keeping only the focused
   surface's input interactive.
+- The wallpaper selector is exposed through the Quickshell `wallpaper` IPC target;
+  bar entry points should call `qs ipc call wallpaper toggle` instead of duplicating selector UI.
 - Locking should display the screen immediately; keep the opacity animation only
   for transitioning after the wallpaper is ready and fading out after
   successful authentication.

@@ -55,6 +55,10 @@ Scope {
                         id: workspacesModule
                     }
 
+                    Wallpaper {
+                        id: wallpaperModule
+                    }
+
                     Wifi {
                         id: wifiModule
                     }
