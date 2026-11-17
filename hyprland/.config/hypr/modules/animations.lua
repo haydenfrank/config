@@ -1,93 +1,26 @@
-hl.animation({
-	leaf = "windowsIn",
-	enabled = true,
-	speed = 3,
-	bezier = "emphasizedDecel",
-	style = "popin 80%",
-})
-hl.animation({
-	leaf = "fadeIn",
-	enabled = true,
-	speed = 3,
-	bezier = "emphasizedDecel",
-})
-hl.animation({
-	leaf = "windowsOut",
-	enabled = true,
-	speed = 2,
-	bezier = "emphasizedDecel",
-	style = "popin 90%",
-})
-hl.animation({
-	leaf = "fadeOut",
-	enabled = true,
-	speed = 2,
-	bezier = "emphasizedDecel",
-})
-hl.animation({
-	leaf = "windowsMove",
-	enabled = true,
-	speed = 3,
-	bezier = "emphasizedDecel",
-	style = "slide",
-})
-hl.animation({
-	leaf = "border",
-	enabled = true,
-	speed = 10,
-	bezier = "emphasizedDecel",
-})
+-- Animation curves
+hl.curve("specialWorkSwitch", { type = "bezier", points = { { 0.05, 0.7 }, { 0.1, 1 } } })
+hl.curve("emphasizedAccel", { type = "bezier", points = { { 0.3, 0 }, { 0.8, 0.15 } } })
+hl.curve("emphasizedDecel", { type = "bezier", points = { { 0.05, 0.7 }, { 0.1, 1 } } })
+hl.curve("standard", { type = "bezier", points = { { 0.2, 0 }, { 0, 1 } } })
+
+-- Animation configs
+hl.animation({ leaf = "layersIn", enabled = true, speed = 3, bezier = "emphasizedDecel", style = "slide" })
+hl.animation({ leaf = "layersOut", enabled = true, speed = 2, bezier = "emphasizedAccel", style = "slide" })
+hl.animation({ leaf = "fadeLayers", enabled = true, speed = 3, bezier = "standard" })
+
+hl.animation({ leaf = "windowsIn", enabled = true, speed = 3, bezier = "emphasizedDecel" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 1, bezier = "emphasizedAccel" })
+hl.animation({ leaf = "windowsMove", enabled = true, speed = 4, bezier = "standard" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 3, bezier = "standard" })
 
 hl.animation({
-	leaf = "layersIn",
+	leaf = "specialWorkspace",
 	enabled = true,
-	speed = 2.7,
-	bezier = "emphasizedDecel",
-	style = "popin 93%",
+	speed = 2,
+	bezier = "specialWorkSwitch",
+	style = "slidefadevert 15%",
 })
-hl.animation({
-	leaf = "layersOut",
-	enabled = true,
-	speed = 2.4,
-	bezier = "menu_accel",
-	style = "popin 94%",
-})
-hl.animation({
-	leaf = "fadeLayersIn",
-	enabled = true,
-	speed = 0.5,
-	bezier = "menu_decel",
-})
-hl.animation({
-	leaf = "fadeLayersOut",
-	enabled = true,
-	speed = 2.7,
-	bezier = "stall",
-})
-hl.animation({
-	leaf = "workspaces",
-	enabled = true,
-	speed = 7,
-	bezier = "menu_decel",
-	style = "slide",
-})
-hl.animation({
-	leaf = "specialWorkspaceIn",
-	enabled = true,
-	speed = 2.8,
-	bezier = "emphasizedDecel",
-	style = "slidevert",
-})
-hl.animation({
-	leaf = "specialWorkspaceOut",
-	enabled = true,
-	speed = 1.2,
-	bezier = "emphasizedAccel",
-	style = "slidevert",
-})
-hl.animation({
-	leaf = "zoomFactor",
-	enabled = true,
-	speed = 3,
-	bezier = "standardDecel",
-})
+hl.animation({ leaf = "fade", enabled = true, speed = 4, bezier = "standard" })
+hl.animation({ leaf = "fadeDim", enabled = true, speed = 4, bezier = "standard" })
+hl.animation({ leaf = "border", enabled = true, speed = 4, bezier = "standard" })
