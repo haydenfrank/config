@@ -39,18 +39,13 @@ ShellRoot {
 
         if (fingerprintPam.active)
             fingerprintPam.abort();
-        if (howdyPam.active)
-            howdyPam.abort();
         if (passwordPam.active)
             passwordPam.abort();
         root.pendingPassword = "";
 
         Qt.callLater(function () {
-            if (root.lockRequested && sessionLock.secure
-                && !fingerprintPam.active && !howdyPam.active && !passwordPam.active) {
+            if (root.lockRequested && sessionLock.secure && !fingerprintPam.active && !passwordPam.active)
                 fingerprintPam.start();
-                howdyPam.start();
-            }
         });
     }
 
@@ -63,8 +58,6 @@ ShellRoot {
 
         if (fingerprintPam.active)
             fingerprintPam.abort();
-        if (howdyPam.active)
-            howdyPam.abort();
 
         if (passwordPam.responseRequired) {
             passwordPam.respond(password);
@@ -137,45 +130,12 @@ ShellRoot {
                     : "Scan fingerprint or enter password";
                 root.statusIsError = true;
                 if (root.lockRequested)
-                    biometricRetryTimer.start();
+                    fingerprintRetryTimer.start();
             }
         }
 
         onError: function (error) {
             root.statusText = "Fingerprint unavailable; enter password";
-            root.statusIsError = true;
-        }
-    }
-
-    PamContext {
-        id: howdyPam
-
-        config: "howdy"
-        configDirectory: Quickshell.shellPath("pam.d")
-
-        onPamMessage: {
-            if (howdyPam.message !== "") {
-                root.statusText = howdyPam.message;
-                root.statusIsError = howdyPam.messageIsError;
-            }
-        }
-
-        onCompleted: function (result) {
-            if (result === PamResult.Success) {
-                root.fadingOut = true;
-                unlockTimer.start();
-            } else {
-                root.statusText = result === PamResult.MaxTries
-                    ? "Face recognition attempts exhausted; enter password"
-                    : "Scan face or enter password";
-                root.statusIsError = true;
-                if (root.lockRequested)
-                    biometricRetryTimer.start();
-            }
-        }
-
-        onError: function (error) {
-            root.statusText = "Face recognition unavailable; enter password";
             root.statusIsError = true;
         }
     }
@@ -214,7 +174,7 @@ ShellRoot {
                     : "Authentication failed";
                 root.statusIsError = true;
                 if (root.lockRequested)
-                    biometricRetryTimer.start();
+                    fingerprintRetryTimer.start();
             }
         }
 
@@ -248,7 +208,6 @@ ShellRoot {
                 wallpaper: root.wallpaperPath
                 passwordText: root.passwordText
                 fingerprintScanning: fingerprintPam.active
-                howdyScanning: howdyPam.active
                 statusText: root.statusText
                 statusIsError: root.statusIsError
 
@@ -275,17 +234,14 @@ ShellRoot {
     }
 
     Timer {
-        id: biometricRetryTimer
+        id: fingerprintRetryTimer
 
         interval: 250
         repeat: false
 
         onTriggered: {
-            if (root.lockRequested && !fingerprintPam.active
-                && !howdyPam.active && !passwordPam.active) {
+            if (root.lockRequested && !fingerprintPam.active && !passwordPam.active)
                 fingerprintPam.start();
-                howdyPam.start();
-            }
         }
     }
 
