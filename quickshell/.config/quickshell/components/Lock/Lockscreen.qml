@@ -16,6 +16,7 @@ Item {
     property bool statusIsError: false
     property string passwordText: ""
     property bool fingerprintScanning: false
+    property bool howdyScanning: false
     property bool fingerprintBlinkOn: true
     readonly property bool wallpaperReady: wallpaper === ""
         || backgroundImage.status === Image.Ready
@@ -227,6 +228,37 @@ Item {
                 repeat: true
                 onTriggered: root.fingerprintBlinkOn = !root.fingerprintBlinkOn
             }
+        }
+    }
+
+    Rectangle {
+        id: howdyBox
+
+        anchors.right: fingerprintBox.left
+        anchors.rightMargin: 18
+        anchors.verticalCenter: passwordField.verticalCenter
+
+        width: 60
+        height: 60
+        radius: width / 2
+        color: colors.surface_container_high
+        border.width: 2
+        border.color: colors.outline_variant
+        opacity: root.howdyScanning ? 1 : 0.45
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 250
+            }
+        }
+
+        Text {
+            anchors.centerIn: parent
+
+            text: "󰄀"
+            color: colors.secondary
+            font.family: "JetBrainsMono Nerd Font Propo"
+            font.pixelSize: 24
         }
     }
 

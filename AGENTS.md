@@ -94,7 +94,8 @@ when a key is released rather than pressed.
   across every lock surface; clear it when submitting authentication.
 - Quickshell uses separate repository-local PAM sessions under
   `quickshell/.config/quickshell/pam.d/`: `fingerprint` runs `pam_fprintd`, and
-  `password` runs `pam_unix`, allowing either method to unlock independently.
+  `howdy` runs `pam_howdy`, and `password` runs `pam_unix`, allowing password,
+  fingerprint, or face authentication to unlock independently.
 - The lock password field displays `Use password or biometric authentication`
   when empty, then shows only masked input while typing; keep the field wide
   enough for that prompt, with the fingerprint icon on the left.
